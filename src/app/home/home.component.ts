@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   condition: boolean;
   loggedIn: boolean;
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private data: DataService) { }
 
   ngOnInit() {
     this.auth.isAuthentiCated();
@@ -25,11 +25,25 @@ export class HomeComponent implements OnInit {
       } else {
         this.loggedIn = false;
       }
-    })
+    });
+    this.onChange('Global Feed');
   }
 
-  onChange() {
+  onChange(event) {
     this.condition = !this.condition;
+    console.log(this.condition);
+    console.log(event);
+    if(event === 'Global Feed') {
+      this.data.getAllArticles().subscribe((list: {articles: Article[]}) => {
+        this.articlesList = list.articles;
+        console.log(list.articles);
+      });
+    }
+    else if(event === 'Your Feed') {
+      this.data.getUserArticles().subscribe((list: {articles: Article[]}) => {
+        this.articlesList = list.articles;
+      });
+    }
   }
 
 }
