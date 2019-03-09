@@ -5,11 +5,12 @@ import { SignupComponent } from "./auth/signup/signup.component";
 import { HomeComponent } from "./home/home.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { ResolveService } from "./profile/resolve.service";
+import { SettingComponent } from "./profile/setting/setting.component";
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
   { path: "signup", component: SignupComponent },
-  { path: "signin", component: SigninComponent },
+  { path: "settings", component: SettingComponent },
   {
     path: ":username",
     component: ProfileComponent,

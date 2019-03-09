@@ -29,6 +29,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.dataService.exchangeUsename(this.username)
     this.dataService.getProfile(this.username).subscribe((params: { profile: Profile }) => {
       this.profileInfo = params.profile;
     });
