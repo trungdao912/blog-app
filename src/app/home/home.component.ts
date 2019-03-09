@@ -31,12 +31,9 @@ export class HomeComponent implements OnInit {
 
   onChange(event) {
     this.condition = !this.condition;
-    console.log(this.condition);
-    console.log(event);
     if(event === 'Global Feed') {
       this.data.getAllArticles().subscribe((list: {articles: Article[]}) => {
         this.articlesList = list.articles;
-        console.log(list.articles);
       });
     }
     else if(event === 'Your Feed') {
