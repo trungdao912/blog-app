@@ -18,6 +18,7 @@ export class DataService {
   REGISTRATION_URL = 'https://conduit.productionready.io/api/users';
   USER_URL = 'https://conduit.productionready.io/api/user';
   PROFILE_URL = 'https://conduit.productionready.io/api/profiles/';
+  TAGS_URL = 'https://conduit.productionready.io/api/tags'
 
   constructor(private http: HttpClient) { }
 
@@ -133,5 +134,8 @@ export class DataService {
 
   unfollowUser(username: string) {
     return this.http.delete(`${this.PROFILE_URL}/${username}/follow`, {});
+  }
+  getTags(){
+    return this.http.get(`${this.TAGS_URL}`)
   }
 }

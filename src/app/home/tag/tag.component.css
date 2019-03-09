@@ -1,0 +1,12 @@
+a {
+  display: inline-block;
+}
+.sidebar {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0px
+}
+
+p {
+    display: block;
+}

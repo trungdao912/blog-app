@@ -1,5 +1,6 @@
 import { AuthService } from './../../auth/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-header',
@@ -8,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   condition: boolean;
+  profile: User;
 
   constructor(private auth: AuthService) { }
 
@@ -15,6 +17,7 @@ export class HeaderComponent implements OnInit {
     this.auth.isAuthenticate.subscribe((boo) => {
       this.condition = boo;
     })
+    this.profile = this.auth.checkUser();
   }
 
 }

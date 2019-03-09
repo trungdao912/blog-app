@@ -15,6 +15,7 @@ import { YourFeedComponent } from './home/your-feed/your-feed.component';
 import { HomeComponent } from './home/home.component';
 import { TagComponent } from './home/tag/tag.component';
 import { DebounceClickDirective } from './debounce-click.directive';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { DebounceClickDirective } from './debounce-click.directive';
     YourFeedComponent,
     HomeComponent,
     TagComponent,
-    DebounceClickDirective
+    DebounceClickDirective,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

@@ -12,7 +12,7 @@
         </a>
       </li>
       <li class="nav-item" *ngIf="condition">
-        <a class="nav-link" [routerLink]="['/setting']" >
+        <a class="nav-link" [routerLink]="['/setting']">
           <i class="ion-gear-a"></i>&nbsp;Settings
         </a>
       </li>
@@ -21,8 +21,13 @@
       </li>
 
       <li class="nav-item" *ngIf="!condition">
-          <a class="nav-link" [routerLink]="['/signin']">Sign in</a>
-        </li>
+        <a class="nav-link" [routerLink]="['/signin']">Sign in</a>
+      </li>
+      <li class="nav-item father" *ngIf="condition"
+      routerLink="/{{profile.user.username}}">
+        <img src="{{ profile.user.image }}" alt="" />
+        <a class="nav-link" >{{ profile.user.username }}</a>
+      </li>
     </ul>
   </div>
 </nav>
