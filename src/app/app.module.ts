@@ -16,6 +16,7 @@ import { HomeComponent } from './home/home.component';
 import { TagComponent } from './home/tag/tag.component';
 import { DebounceClickDirective } from './debounce-click.directive';
 import { ProfileComponent } from './profile/profile.component';
+import { ArticlesComponent } from './articles/articles/articles.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ProfileComponent } from './profile/profile.component';
     HomeComponent,
     TagComponent,
     DebounceClickDirective,
-    ProfileComponent
+    ProfileComponent,
+    ArticlesComponent
   ],
   imports: [
     BrowserModule,
