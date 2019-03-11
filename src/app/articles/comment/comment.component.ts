@@ -3,7 +3,8 @@ import { ArticleInfor } from "src/app/models/aritcleInfor.model";
 import { ActivatedRoute } from "@angular/router";
 import { DataService } from "src/app/data.service";
 import { map } from "rxjs/operators";
-
+import { User } from "src/app/models/user.model";
+import { AuthService } from "src/app/auth/auth.service";
 
 @Component({
   selector: "app-comment",
@@ -11,10 +12,13 @@ import { map } from "rxjs/operators";
   styleUrls: ["./comment.component.css"]
 })
 export class CommentComponent implements OnInit {
-  comment
+  comment;
+  user: User;
+  ArticlesId: string;
   constructor(
     private activateRoute: ActivatedRoute,
-    private dataService: DataService
+    private dataService: DataService,
+    private auth: AuthService
   ) {
     this.activateRoute.data
       .pipe(
@@ -23,12 +27,21 @@ export class CommentComponent implements OnInit {
         })
       )
       .subscribe((data: ArticleInfor) => {
-        this.dataService.getComments(data.slug).subscribe((param) => {
+        this.dataService.getComments(data.slug).subscribe(param => {
           this.comment = param;
-          console.log(this.comment);
+          this.ArticlesId = data.slug;
         });
       });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.user = this.auth.checkUser();
+  }
+  postComment(value: HTMLInputElement) {
+    this.dataService.postComment(value.value, this.ArticlesId).subscribe();
+    this.dataService.getComments(this.ArticlesId).subscribe(param => {
+      this.comment = param;
+    });
+    value.value=""
+  }
 }

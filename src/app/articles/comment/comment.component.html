@@ -1,19 +1,39 @@
-<div class="card">
-    <div class="card-block">
+<form class="card comment-form">
+  <div class="card-block">
+    <textarea
+      class="form-control"
+      placeholder="Write a comment..."
+      rows="3" 
+      #input
+    ></textarea>
+  </div>
+  <div class="card-footer">
+    <img
+      src="{{ user.user.image }}"
+      class="comment-author-img"
+    />
+    <button class="btn btn-sm btn-primary"
+    (click)="postComment(input)">
+      Post Comment
+    </button>
+  </div>
+</form>
+
+<div class="card" *ngFor="let item of comment?.comments">
+    <div class="card-block" >
       <p class="card-text">
-        With supporting text below as a natural lead-in to additional
-        content.
+        {{ item.body }}
       </p>
     </div>
     <div class="card-footer">
-      <a href="" class="comment-author">
+      <a class="comment-author">
         <img
-          src="http://i.imgur.com/Qr71crq.jpg"
+          src="{{ item?.author.image }}"
           class="comment-author-img"
         />
       </a>
       &nbsp;
-      <a href="" class="comment-author">Jacob Schmidt</a>
-      <span class="date-posted">Dec 29th</span>
+      <a href="" class="comment-author">{{ item?.author.username }}</a>
+      <span class="date-posted">{{ item?.createdAt }}</span>
     </div>
   </div>
