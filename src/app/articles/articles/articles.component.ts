@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { DataService } from "src/app/data.service";
 import { Article } from "src/app/models/article.model";
-import { ArticlesService } from "../articles.service";
+
 
 @Component({
   selector: "app-articles",
@@ -12,7 +12,7 @@ export class ArticlesComponent implements OnInit {
   articlesList: Article;
   constructor(
     private dataservice: DataService,
-    private articlesservice: ArticlesService
+
   ) {}
   ngOnInit() {
     this.dataservice
@@ -58,4 +58,5 @@ export class ArticlesComponent implements OnInit {
       }
     }
   }
+
 }
