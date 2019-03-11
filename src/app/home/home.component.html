@@ -21,8 +21,8 @@
             </div>
             <!-- <app-global-feed *ngIf="!condition"></app-global-feed>
             <app-your-feed *ngIf="condition"></app-your-feed> -->
-
-            <div class="article-preview" *ngFor="let article of articlesList?.articles">
+              <!-- <div [hidden]="loaded">Loading...</div> -->
+            <!-- <div class="article-preview" *ngFor="let article of articlesList?.articles">
               <div class="article-meta" >
                 <a routerLink="{{ article.author.username }}">
                     <img src="{{article.author.image}}"
@@ -32,7 +32,10 @@
                   <a routerLink="{{ article.author.username }}" class="author">{{ article.author.username }}</a>
                   <span class="date">{{ article.createdAt | date: 'fullDate' }}</span>
                 </div>
-                <button class="btn btn-outline-primary btn-sm pull-xs-right" (click)="onToggleFavorite(article)">
+                <button class="btn btn-outline-primary btn-sm pull-xs-right"
+                appDebounceClick
+                (debounceClick)="onToggleFavorite(article)"
+                [ngClass]="{'like': article.favorited}">
                   <i class="ion-heart"></i> {{ article.favoritesCount }}
                 </button>
               </div>
@@ -41,6 +44,10 @@
                 <p>{{ article.description }}</p>
                 <span>Read more...</span>
               </a>
+            </div> -->
+
+            <div *ngFor="let article of articlesList?.articles">
+              <app-articles [article]="article"></app-articles>
             </div>
 
       </div>

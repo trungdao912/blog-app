@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   articlesList: Article;
   condition: boolean;
   loggedIn: boolean;
+  loaded = false;
 
   constructor(private auth: AuthService, private data: DataService) { }
 
@@ -36,13 +37,14 @@ export class HomeComponent implements OnInit {
       this.condition = false;
       this.data.getAllArticles().subscribe((list: Article) => {
         this.articlesList = list;
-        console.log(list.articles);
+        this.loaded = true;
       });
     }
     else if (event === 'Your Feed') {
       this.condition = true;
       this.data.getUserArticles().subscribe((list: Article) => {
         this.articlesList = list;
+        this.loaded = true;
       });
     }
   }

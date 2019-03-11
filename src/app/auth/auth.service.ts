@@ -30,7 +30,7 @@ export class AuthService {
       this.data.getUserLogInInfo(user.email, user.password).subscribe((userInfo: User) => {
         if (userInfo && userInfo.user.token) {
           localStorage.setItem('currentUser', JSON.stringify(userInfo));
-          this.user.next(userInfo);
+          // this.user.next(userInfo);
           this.isAuthenticated.next(true);
         }
       })

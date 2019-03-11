@@ -17,7 +17,6 @@ export class SettingComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = this.auth.checkUser();
-    // console.log(this.currentUser);
 
     this.settingForm = new FormGroup({
       'image': new FormControl(this.currentUser.user.image),
@@ -30,13 +29,14 @@ export class SettingComponent implements OnInit {
 
   onSubmit() {
     console.log(this.settingForm);
+    // tslint:disable-next-line:max-line-length
     this.data.updateUser(this.settingForm.value.image, this.settingForm.value.username, this.settingForm.value.bio, this.settingForm.value.email, this.settingForm.value.password)
       .subscribe((data: User) => {
         this.router.navigateByUrl('/');
         this.auth.updateUserInFoInLocalStorage(data);
         this.auth.user.next(data);
         return;
-      })
+      });
   }
 
   onLogout() {

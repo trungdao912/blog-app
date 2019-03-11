@@ -4,19 +4,32 @@
       <h1>{{ articleInfor.title }}</h1>
 
       <div class="article-meta">
-        <a href=""><img src="{{ articleInfor.author.image }}"/></a>
+        <a routerLink="/{{ articleInfor.author.username }}"><img src="{{ articleInfor.author.image }}"/></a>
         <div class="info">
-          <a href="" class="author">{{ articleInfor.author.username }}</a>
+          <a routerLink="/{{ articleInfor.author.username }}" class="author">{{ articleInfor.author.username }}</a>
           <span class="date">{{ articleInfor.createdAt | date }}</span>
         </div>
-        <button class="btn btn-sm btn-outline-secondary">
+        <button class="btn btn-sm btn-outline-secondary" *ngIf="articleInfor.author.username === isUser()">
           <i class="ion-plus-round"></i>
           &nbsp;Edit Article
         </button>
         &nbsp;&nbsp;
-        <button class="btn btn-sm btn-outline-primary">
+        <button class="btn btn-sm btn-outline-primary" *ngIf="articleInfor.author.username === isUser()">
           <i class="ion-heart"></i>
           &nbsp; Delete Article
+        </button>
+
+        <button class="btn btn-sm btn-outline-secondary" *ngIf="!(articleInfor.author.username === isUser())">
+          <i class="ion-minus-round" *ngIf="articleInfor?.author.following"></i>
+          <i class="ion-plus-round" *ngIf="!articleInfor?.author.following"></i>
+          &nbsp;<span *ngIf="articleInfor?.author.following" (click)="unfollowUser(articleInfor)">Unfollow</span>
+          <span *ngIf="!articleInfor?.author.following" (click)="followUser(articleInfor)">Follow</span> {{ articleInfor.author.username }}
+        </button>
+        &nbsp;&nbsp;
+        <button class="btn btn-sm btn-outline-primary" *ngIf="!(articleInfor.author.username === isUser())">
+          <i class="ion-heart"></i>
+          &nbsp; <span *ngIf="articleInfor?.favorited" (click)="unfavorite(articleInfor)">Unfavorite</span>
+          <span *ngIf="!articleInfor?.favorited" (click)="favorite(articleInfor)">Favorite</span>({{ articleInfor.favoritesCount }})
         </button>
       </div>
     </div>
@@ -41,21 +54,34 @@
           <a href="" class="author">{{ articleInfor.author.username }}</a>
           <span class="date">{{ articleInfor.createdAt | date }}</span>
         </div>
-        <button class="btn btn-sm btn-outline-secondary">
+        <button class="btn btn-sm btn-outline-secondary" *ngIf="articleInfor.author.username === isUser()">
           <i class="ion-plus-round"></i>
           &nbsp;Edit Article
         </button>
         &nbsp;&nbsp;
-        <button class="btn btn-sm btn-outline-primary">
+        <button class="btn btn-sm btn-outline-primary" *ngIf="articleInfor.author.username === isUser()">
           <i class="ion-heart"></i>
           &nbsp; Delete Article
+        </button>
+
+        <button class="btn btn-sm btn-outline-secondary" *ngIf="!(articleInfor.author.username === isUser())">
+          <i class="ion-minus-round" *ngIf="articleInfor?.author.following"></i>
+          <i class="ion-plus-round" *ngIf="!articleInfor?.author.following"></i>
+          &nbsp;<span *ngIf="articleInfor?.author.following" (click)="unfollowUser(articleInfor)">Unfollow</span>
+          <span *ngIf="!articleInfor?.author.following" (click)="followUser(articleInfor)">Follow</span> {{ articleInfor.author.username }}
+        </button>
+        &nbsp;&nbsp;
+        <button class="btn btn-sm btn-outline-primary" *ngIf="!(articleInfor.author.username === isUser())">
+          <i class="ion-heart"></i>
+          &nbsp; <span *ngIf="articleInfor?.favorited" (click)="unfavorite(articleInfor)">Unfavorite</span>
+          <span *ngIf="!articleInfor?.favorited" (click)="favorite(articleInfor)">Favorite</span>({{ articleInfor.favoritesCount }})
         </button>
       </div>
     </div>
 
     <div class="row">
       <div class="col-xs-12 col-md-8 offset-md-2">
-       
+
         <app-comment></app-comment>
       </div>
     </div>

@@ -1,51 +1,27 @@
-<div class="container">
-  <div class="row">
-    <div class="col-xs-12 col-md-10 offset-md-1">
-      <div class="articles-toggle">
-        <ul class="nav nav-pills outline-active">
-          <li class="nav-item">
-            <a class="nav-link active" (click)="getTypeArticles('myArticles')"
-              >My Articles</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" (click)="getTypeArticles('farAriticles')"
-              >Favorited Articles {{ article }}</a
-            >
-          </li>
-        </ul>
-      </div>
-
-      <div class="article-preview" *ngFor="let item of articlesList?.articles">
-        <div class="article-meta">
-          <a><img src="{{ item.author.image }}"/></a>
-          <div class="info">
-            <a  class="author">{{ item.author.username }}</a>
-            <span class="date">{{ item.createdAt }}</span>
-          </div>
-          <button
-          [ngClass]="{'like': item.favorited}"
-            (click)="react(item)"
-            appDebounceClick
-            class="btn btn-outline-primary btn-sm pull-xs-right"
-          >
-            <i class="ion-heart"></i> {{ item.favoritesCount }}
-          </button>
-        </div>
-        <a
-          class="preview-link"
-          routerLink="/article/{{ item.slug }}"
-        >
-          <h1>
-            {{ item?.body }}
-          </h1>
-          <p>{{ item?.description }}</p>
-          <span>Read more...</span>
-          <ul class="tag-list" *ngFor="let listtag of item?.tagList">
-            <li class="tag-default tag-pill tag-outline">{{ listtag }}</li>
-          </ul>
-        </a>
-      </div>
+<div class="article-preview">
+  <div class="article-meta" routerLink="/{{ article?.author.username }}">
+    <a><img src="{{ article?.author.image }}"/></a>
+    <div class="info">
+      <a class="author">{{ article?.author.username }}</a>
+      <span class="date">{{ article?.createdAt }}</span>
     </div>
+    <button
+      [ngClass]="{ like: article?.favorited }"
+      appDebounceClick
+      (debounceClick)="react(article)"
+      class="btn btn-outline-primary btn-sm pull-xs-right"
+    >
+      <i class="ion-heart"></i> {{ article?.favoritesCount }}
+    </button>
   </div>
+  <a class="preview-link" routerLink="/article/{{ article?.slug }}">
+    <h1>
+      {{ article?.body }}
+    </h1>
+    <p>{{ article?.description }}</p>
+    <span>Read more...</span>
+    <ul class="tag-list" *ngFor="let listtag of article?.tagList">
+      <li class="tag-default tag-pill tag-outline">{{ listtag }}</li>
+    </ul>
+  </a>
 </div>

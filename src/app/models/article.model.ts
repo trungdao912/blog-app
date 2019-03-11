@@ -13,5 +13,5 @@ export interface Article {
     author:         Author;
     favorited:      boolean;
     favoritesCount: number;
-  }
+  }[];
 }
