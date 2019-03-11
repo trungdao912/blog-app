@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { DataService } from "src/app/data.service";
 import { Article } from "src/app/models/article.model";
-import { log } from "util";
+import { ArticlesService } from "../articles.service";
 
 @Component({
   selector: "app-articles",
@@ -10,41 +10,46 @@ import { log } from "util";
 })
 export class ArticlesComponent implements OnInit {
   articlesList: Article;
-  constructor(private dataservice: DataService) {}
+  constructor(
+    private dataservice: DataService,
+    private articlesservice: ArticlesService
+  ) {}
   ngOnInit() {
-    this.dataservice.getUserArticles().subscribe((params: Article) => {
-      this.articlesList = params;
-      console.log();
-    });
+    this.dataservice
+      .getAllUserArticle(this.dataservice.currentUser)
+      .subscribe((params: Article) => {
+        this.articlesList = params;
+      });
   }
 
   getTypeArticles(value) {
     if (value == "myArticles") {
-      this.dataservice.getUserArticles().subscribe((params: Article) => {
-        this.articlesList = params;
-      });
-    }
-    if (value == "farAriticles") {
+      this.dataservice
+        .getAllUserArticle(this.dataservice.currentUser)
+        .subscribe((params: Article) => {
+          this.articlesList = params;
+        });
+    } else {
       this.dataservice
         .getFavouriteArticle(this.dataservice.currentUser)
         .subscribe((params: Article) => {
           this.articlesList = params;
+         
         });
     }
   }
   react(value) {
-    for (var i = 0; i < this.articlesList.articles.length; i++) {
+    for (var i = 0; i < this.articlesList.articlesCount; i++) {
       if (value == this.articlesList.articles[i].slug) {
-        console.log(this.articlesList.articles[i].favorited);
         if (this.articlesList.articles[i].favorited == true) {
           this.articlesList.articles[i].favoritesCount -= 1;
-          this.articlesList.articles[i].favorited =false
+          this.articlesList.articles[i].favorited = false;
           this.dataservice
             .unfavouritePost(this.articlesList.articles[i].slug)
             .subscribe();
         } else {
           this.articlesList.articles[i].favoritesCount += 1;
-          this.articlesList.articles[i].favorited =true
+          this.articlesList.articles[i].favorited = true;
 
           this.dataservice
             .favouritePost(this.articlesList.articles[i].slug)

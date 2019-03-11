@@ -24,17 +24,17 @@
             <span class="date">{{ item.createdAt }}</span>
           </div>
           <button
-            (click)="react(item.slug)"
+            (click)="react(item?.slug)"
             class="btn btn-outline-primary btn-sm pull-xs-right"
           >
             <i class="ion-heart"></i> {{ item.favoritesCount }}
           </button>
         </div>
-        <a href="" class="preview-link">
+        <a routerLink="/article/{{ item.slug }}" class="preview-link">
           <h1>
-            {{ item.body }}
+            {{ item?.body }}
           </h1>
-          <p>{{ item.description }}</p>
+          <p>{{ item?.description }}</p>
           <span>Read more...</span>
           <ul class="tag-list" *ngFor="let listtag of item?.tagList">
             <li class="tag-default tag-pill tag-outline">{{ listtag }}</li>
