@@ -47,7 +47,16 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  onToggleFavorite() {
+  onToggleFavorite(article) {
+    if (article.favorited == false) {
+      article.favorited = true;
+      article.favoritesCount += 1;
+      this.data.favouritePost(article.slug).subscribe();
+    } else {
+      article.favorited = false;
+      article.favoritesCount -= 1;
+      this.data.unfavouritePost(article.slug).subscribe();
+    }
 
   }
 
