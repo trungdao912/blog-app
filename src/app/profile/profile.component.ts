@@ -25,6 +25,7 @@ export class ProfileComponent implements OnInit {
       )
       .subscribe(data => {
         this.username = data.username;
+        console.log(data);
       });
   }
 
