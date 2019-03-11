@@ -20,7 +20,7 @@ export class TokenInterceptorService implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    let user = this.auth.checkUser();
+    let user = JSON.parse(localStorage.getItem('currentUser'));
     if (user && user.user.token) {
       req = req.clone({
         setHeaders: {
