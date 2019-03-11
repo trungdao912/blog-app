@@ -24,15 +24,19 @@
             <span class="date">{{ item.createdAt }}</span>
           </div>
           <button
-            (click)="react(item?.slug)"
+          [ngClass]="{'like': item.favorited}"
+            (click)="react(item)"
+            appDebounceClick
             class="btn btn-outline-primary btn-sm pull-xs-right"
           >
             <i class="ion-heart"></i> {{ item.favoritesCount }}
           </button>
         </div>
-        <a routerLink="/article/{{ item.slug }}"
-         class="preview-link"
-         (click)="getArticlesId( item.slug )">
+        <a
+          routerLink="/article/{{ item.slug }}"
+          class="preview-link"
+          (click)="getArticlesId(item.slug)"
+        >
           <h1>
             {{ item?.body }}
           </h1>

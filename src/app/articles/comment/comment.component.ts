@@ -20,6 +20,7 @@ export class CommentComponent implements OnInit {
     private dataService: DataService,
     private auth: AuthService
   ) {
+    this.user = this.auth.checkUser();
     this.activateRoute.data
       .pipe(
         map(data => {
@@ -34,14 +35,23 @@ export class CommentComponent implements OnInit {
       });
   }
 
-  ngOnInit() {
-    this.user = this.auth.checkUser();
-  }
+  ngOnInit() {}
   postComment(value: HTMLInputElement) {
-    this.dataService.postComment(value.value, this.ArticlesId).subscribe();
-    this.dataService.getComments(this.ArticlesId).subscribe(param => {
-      this.comment = param;
+    this.dataService.postComment(value.value, this.ArticlesId).subscribe(() => {
+      this.dataService.getComments(this.ArticlesId).subscribe(param => {
+        this.comment = param;
+      });
     });
-    value.value=""
+
+    value.value = "";
+  }
+
+  delete(value) {
+    this.dataService.deleteComment(this.ArticlesId, value).subscribe(() => {
+      this.dataService.getComments(this.ArticlesId).subscribe(param => {
+        this.comment = param;
+        console.log(param);
+      });
+    });
   }
 }
