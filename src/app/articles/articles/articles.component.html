@@ -30,7 +30,9 @@
             <i class="ion-heart"></i> {{ item.favoritesCount }}
           </button>
         </div>
-        <a routerLink="/article/{{ item.slug }}" class="preview-link">
+        <a routerLink="/article/{{ item.slug }}"
+         class="preview-link"
+         (click)="getArticlesId( item?.slug )">
           <h1>
             {{ item?.body }}
           </h1>

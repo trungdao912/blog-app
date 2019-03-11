@@ -7,6 +7,7 @@ import { ProfileComponent } from "./profile/profile.component";
 import { ResolveService } from "./profile/resolve.service";
 import { SettingComponent } from "./profile/setting/setting.component";
 import { ArticleInfomationComponent } from "./articles/article-infomation/article-infomation.component";
+import { ResolveArticleIdService } from "./articles/resolve-article-id.service";
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -19,7 +20,13 @@ const routes: Routes = [
       profile: ResolveService
     }
   },
-  { path: "article/:id", component: ArticleInfomationComponent }
+  {
+    path: "article/:id",
+    component: ArticleInfomationComponent,
+    resolve: {
+      profile: ResolveArticleIdService
+    }
+  }
 ];
 
 @NgModule({
