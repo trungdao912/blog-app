@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { DataService } from "src/app/data.service";
 import { Article } from "src/app/models/article.model";
 
-
 @Component({
   selector: "app-articles",
   templateUrl: "./articles.component.html",
@@ -10,10 +9,7 @@ import { Article } from "src/app/models/article.model";
 })
 export class ArticlesComponent implements OnInit {
   articlesList: Article;
-  constructor(
-    private dataservice: DataService,
-
-  ) {}
+  constructor(private dataservice: DataService) {}
   ngOnInit() {
     this.dataservice
       .getAllUserArticle(this.dataservice.currentUser)
@@ -37,24 +33,15 @@ export class ArticlesComponent implements OnInit {
         });
     }
   }
-  react(value) {
-    for (var i = 0; i < this.articlesList.articlesCount; i++) {
-      if (value == this.articlesList.articles[i].slug) {
-        if (this.articlesList.articles[i].favorited == true) {
-          this.articlesList.articles[i].favoritesCount -= 1;
-          this.articlesList.articles[i].favorited = false;
-          this.dataservice
-            .unfavouritePost(this.articlesList.articles[i].slug)
-            .subscribe();
-        } else {
-          this.articlesList.articles[i].favoritesCount += 1;
-          this.articlesList.articles[i].favorited = true;
-          this.dataservice
-            .favouritePost(this.articlesList.articles[i].slug)
-            .subscribe();
-        }
-      }
+  react(item) {
+    if (item.favorited == false) {
+      item.favorited = true;
+      item.favoritesCount += 1;
+      this.dataservice.favouritePost(item.slug).subscribe();
+    } else {
+      item.favorited = false;
+      item.favoritesCount -= 1;
+      this.dataservice.unfavouritePost(item.slug).subscribe();
     }
   }
-
 }

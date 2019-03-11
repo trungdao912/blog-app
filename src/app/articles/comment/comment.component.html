@@ -35,5 +35,9 @@
       &nbsp;
       <a href="" class="comment-author">{{ item?.author.username }}</a>
       <span class="date-posted">{{ item?.createdAt }}</span>
+      <button class="btn btn-sm btn-danger"
+      (click)="delete(item.id)"
+      *ngIf="user.user.username == item?.author.username"
+      >Delete</button>
     </div>
   </div>
