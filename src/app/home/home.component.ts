@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  articlesList: Article[];
+  articlesList: Article;
   condition: boolean;
   loggedIn: boolean;
 
@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
     this.auth.isAuthentiCated();
     this.auth.isAuthenticate.subscribe((boo) => {
       this.condition = boo;
+
       if (this.condition) {
         this.loggedIn = true;
       } else {
@@ -31,17 +32,17 @@ export class HomeComponent implements OnInit {
 
   onChange(event) {
     this.condition = !this.condition;
-    console.log(this.condition);
-    console.log(event);
+    // console.log(this.condition);
+    // console.log(event);
     if(event === 'Global Feed') {
-      this.data.getAllArticles().subscribe((list: {articles: Article[]}) => {
-        this.articlesList = list.articles;
-        console.log(list.articles);
+      this.data.getAllArticles().subscribe((list: Article) => {
+        this.articlesList = list;
+        // console.log(list.articles);
       });
     }
     else if(event === 'Your Feed') {
-      this.data.getUserArticles().subscribe((list: {articles: Article[]}) => {
-        this.articlesList = list.articles;
+      this.data.getUserArticles().subscribe((list: Article) => {
+        this.articlesList = list;
       });
     }
   }

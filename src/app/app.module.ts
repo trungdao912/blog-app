@@ -18,7 +18,8 @@ import { DebounceClickDirective } from './debounce-click.directive';
 import { ProfileComponent } from './profile/profile.component';
 import { ArticlesComponent } from './articles/articles/articles.component';
 import { ArticleInfomationComponent } from './articles/article-infomation/article-infomation.component';
-import { SettingComponent } from './profile/setting/setting.component';
+import { SettingComponent } from './setting/setting.component';
+import { NewArticleComponent } from './articles/new-article/new-article.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { SettingComponent } from './profile/setting/setting.component';
     ProfileComponent,
     ArticlesComponent,
     ArticleInfomationComponent,
-    SettingComponent
+    SettingComponent,
+    NewArticleComponent
   ],
   imports: [
     BrowserModule,

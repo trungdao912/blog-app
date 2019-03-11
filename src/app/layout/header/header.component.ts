@@ -17,7 +17,10 @@ export class HeaderComponent implements OnInit {
     this.auth.isAuthenticate.subscribe((boo) => {
       this.condition = boo;
     })
-    this.profile = this.auth.checkUser();
+    this.auth.userEmit.subscribe((user: User) => {
+      // console.log(user);
+      this.profile = user;
+    })
   }
 
 }

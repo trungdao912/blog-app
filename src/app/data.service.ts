@@ -82,6 +82,7 @@ export class DataService {
     body: string,
     tagList?: Array<string>
   ) {
+    // console.log('success');
     return this.http.post(this.ALL_ARTICLES_URL, {
       article: {
         title: title,
@@ -153,5 +154,5 @@ export class DataService {
   exchangeUsename(value) {
     this.currentUser = value;
   }
- 
+
 }

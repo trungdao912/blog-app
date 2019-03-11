@@ -7,12 +7,12 @@
         <a class="nav-link active" [routerLink]="['/']">Home</a>
       </li>
       <li class="nav-item" *ngIf="condition">
-        <a class="nav-link" href="" [routerLink]="['/new-article']">
-          <i class="ion-compose"></i>&nbsp;New Post
+        <a class="nav-link" href="" [routerLink]="['/editor']">
+          <i class="ion-compose"></i>&nbsp;New Article
         </a>
       </li>
       <li class="nav-item" *ngIf="condition">
-        <a class="nav-link" [routerLink]="['/setting']">
+        <a class="nav-link" [routerLink]="['/settings']">
           <i class="ion-gear-a"></i>&nbsp;Settings
         </a>
       </li>
@@ -24,9 +24,9 @@
         <a class="nav-link" [routerLink]="['/signin']">Sign in</a>
       </li>
       <li class="nav-item father" *ngIf="condition"
-      routerLink="/{{profile.user.username}}">
-        <img src="{{ profile.user.image }}" alt="" />
-        <a class="nav-link" >{{ profile.user.username }}</a>
+      routerLink="/{{profile?.user.username}}">
+        <img src="{{ profile?.user.image }}" alt="" />
+        <a class="nav-link" >{{ profile?.user.username }}</a>
       </li>
     </ul>
   </div>

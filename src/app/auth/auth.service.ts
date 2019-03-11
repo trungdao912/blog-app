@@ -37,6 +37,10 @@ export class AuthService {
     })
   }
 
+  logout() {
+    localStorage.removeItem('currentUser');
+  }
+
   getToken(): string {
     if (!JSON.parse(localStorage.getItem('currentUser'))) {
       return;
@@ -53,6 +57,10 @@ export class AuthService {
   }
 
   checkUser() {
-    return this.user.value;
+    return JSON.parse(localStorage.getItem('currentUser'));
+  }
+
+  updateUserInFoInLocalStorage(newUser) {
+    localStorage.setItem('currentUser', JSON.stringify(newUser));
   }
 }
