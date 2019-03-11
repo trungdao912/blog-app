@@ -34,7 +34,6 @@ export class ArticlesComponent implements OnInit {
         .getFavouriteArticle(this.dataservice.currentUser)
         .subscribe((params: Article) => {
           this.articlesList = params;
-         
         });
     }
   }
@@ -50,7 +49,6 @@ export class ArticlesComponent implements OnInit {
         } else {
           this.articlesList.articles[i].favoritesCount += 1;
           this.articlesList.articles[i].favorited = true;
-
           this.dataservice
             .favouritePost(this.articlesList.articles[i].slug)
             .subscribe();

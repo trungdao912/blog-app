@@ -19,6 +19,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { ArticlesComponent } from './articles/articles/articles.component';
 import { ArticleInfomationComponent } from './articles/article-infomation/article-infomation.component';
 import { SettingComponent } from './profile/setting/setting.component';
+import { CommentComponent } from './articles/comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { SettingComponent } from './profile/setting/setting.component';
     ProfileComponent,
     ArticlesComponent,
     ArticleInfomationComponent,
-    SettingComponent
+    SettingComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,

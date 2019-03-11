@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { DataService } from "src/app/data.service";
 import { ActivatedRoute } from "@angular/router";
 import { map } from "rxjs/operators";
+import { ArticleInfor } from "src/app/models/aritcleInfor.model";
 
 
 @Component({
@@ -10,6 +11,7 @@ import { map } from "rxjs/operators";
   styleUrls: ["./article-infomation.component.css"]
 })
 export class ArticleInfomationComponent implements OnInit {
+  articleInfor:ArticleInfor
   constructor(
     private activateRoute: ActivatedRoute,
     private dataService: DataService
@@ -18,8 +20,8 @@ export class ArticleInfomationComponent implements OnInit {
       map(data => {
        return data.profile.article
       })
-    ).subscribe(data =>{
-      console.log(data)
+    ).subscribe((data:ArticleInfor) =>{
+      this.articleInfor=data
     });
   }
 
