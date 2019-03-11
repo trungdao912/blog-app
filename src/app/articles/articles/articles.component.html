@@ -18,9 +18,9 @@
 
       <div class="article-preview" *ngFor="let item of articlesList?.articles">
         <div class="article-meta">
-          <a href=""><img src="{{ item.author.image }}"/></a>
+          <a><img src="{{ item.author.image }}"/></a>
           <div class="info">
-            <a href="" class="author">{{ item.author.username }}</a>
+            <a  class="author">{{ item.author.username }}</a>
             <span class="date">{{ item.createdAt }}</span>
           </div>
           <button
@@ -33,9 +33,8 @@
           </button>
         </div>
         <a
-          routerLink="/article/{{ item.slug }}"
           class="preview-link"
-          (click)="getArticlesId(item.slug)"
+          routerLink="/article/{{ item.slug }}"
         >
           <h1>
             {{ item?.body }}
