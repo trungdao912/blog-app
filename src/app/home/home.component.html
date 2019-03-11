@@ -12,10 +12,10 @@
           <div class="feed-toggle">
               <ul class="nav nav-pills outline-active">
                 <li class="nav-item">
-                  <a class="nav-link" (click)="onChange($event.target.textContent)" [ngClass]="{active: !condition}" *ngIf="loggedIn">Your Feed</a>
+                  <a class="nav-link" (click)="onChange($event.target.textContent)" [ngClass]="{active: condition}" *ngIf="loggedIn">Your Feed</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" (click)="onChange($event.target.textContent)" [ngClass]="{active: condition}">Global Feed</a>
+                  <a class="nav-link" (click)="onChange($event.target.textContent)" [ngClass]="{active: !condition}">Global Feed</a>
                 </li>
               </ul>
             </div>
@@ -23,16 +23,16 @@
             <app-your-feed *ngIf="condition"></app-your-feed> -->
 
             <div class="article-preview" *ngFor="let article of articlesList?.articles">
-              <div class="article-meta">
-                <a href="profile.html">
+              <div class="article-meta" >
+                <a routerLink="{{ article.author.username }}">
                     <img src="{{article.author.image}}"
                     />
                 </a>
                 <div class="info">
-                  <a href="" class="author">{{ article.author.username }}</a>
+                  <a routerLink="{{ article.author.username }}" class="author">{{ article.author.username }}</a>
                   <span class="date">{{ article.createdAt | date: 'fullDate' }}</span>
                 </div>
-                <button class="btn btn-outline-primary btn-sm pull-xs-right">
+                <button class="btn btn-outline-primary btn-sm pull-xs-right" (click)="onToggleFavorite()">
                   <i class="ion-heart"></i> {{ article.favoritesCount }}
                 </button>
               </div>

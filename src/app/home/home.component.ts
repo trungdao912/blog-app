@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
 
       if (this.condition) {
         this.loggedIn = true;
+        this.condition = false;
       } else {
         this.loggedIn = false;
       }
@@ -31,20 +32,23 @@ export class HomeComponent implements OnInit {
   }
 
   onChange(event) {
-    this.condition = !this.condition;
-    // console.log(this.condition);
-    // console.log(event);
-    if(event === 'Global Feed') {
+    if (event === 'Global Feed') {
+      this.condition = false;
       this.data.getAllArticles().subscribe((list: Article) => {
         this.articlesList = list;
-        // console.log(list.articles);
+        console.log(list.articles);
       });
     }
-    else if(event === 'Your Feed') {
+    else if (event === 'Your Feed') {
+      this.condition = true;
       this.data.getUserArticles().subscribe((list: Article) => {
         this.articlesList = list;
       });
     }
+  }
+
+  onToggleFavorite() {
+
   }
 
 }
