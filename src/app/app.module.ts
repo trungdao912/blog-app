@@ -22,6 +22,7 @@ import { SettingComponent } from './setting/setting.component';
 import { CommentComponent } from './articles/comment/comment.component';
 import { NewArticleComponent } from './articles/new-article/new-article.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import {NgxPaginationModule} from 'ngx-pagination'; 
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ],
   providers: [
     {

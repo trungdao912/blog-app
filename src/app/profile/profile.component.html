@@ -18,13 +18,23 @@
               &nbsp; Edit Profile Setting
             </button>
             <button
-            class="btn btn-sm btn-outline-secondary action-btn"
-            *ngIf="!(profileInfo?.username == isUser())"
-          >
-            <i class="fas fa-cog"></i>
-            &nbsp; <span *ngIf="profileInfo?.following" (click)="unfollowUser(profileInfo)">Unfollow</span>
-            <span *ngIf="!profileInfo?.following" (click)="followUser(profileInfo)">Follow</span> User
-          </button>
+              class="btn btn-sm btn-outline-secondary action-btn"
+              *ngIf="!(profileInfo?.username == isUser())"
+            >
+              <i class="fas fa-cog"></i>
+              &nbsp;
+              <span
+                *ngIf="profileInfo?.following"
+                (click)="unfollowUser(profileInfo)"
+                >Unfollow</span
+              >
+              <span
+                *ngIf="!profileInfo?.following"
+                (click)="followUser(profileInfo)"
+                >Follow</span
+              >
+              User
+            </button>
           </div>
         </div>
       </div>
@@ -36,23 +46,34 @@
         <div class="articles-toggle">
           <ul class="nav nav-pills outline-active">
             <li class="nav-item">
-              <a class="nav-link" (click)="myArticleLoad()" [ngClass]="{active: !condition}"
+              <a
+                class="nav-link"
+                (click)="myArticleLoad()"
+                [ngClass]="{ active: !condition }"
                 >My Articles</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" (click)="myFavouriteLoad()" [ngClass]="{active: condition}"
+              <a
+                class="nav-link"
+                (click)="myFavouriteLoad()"
+                [ngClass]="{ active: condition }"
                 >Favorited Articles</a
               >
             </li>
           </ul>
         </div>
-        <p id="notis"  *ngIf="!articles[0]"> No articles to display...</p>
-        <div *ngFor="let article of articles">
+        <p id="notis" *ngIf="!articles">No articles to display...</p>
+        <div
+          *ngFor="
+            let article of (articles
+              | paginate: { itemsPerPage: 3, currentPage: p })
+          "
+        >
           <app-articles [article]="article"></app-articles>
         </div>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
       </div>
     </div>
   </div>
-
 </div>

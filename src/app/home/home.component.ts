@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   loaded = false;
   optionArr = ["Global Feed", "Your Feed", ""];
   currIndex = 0;
+  p = 1;
 
   constructor(
     private auth: AuthService,
@@ -46,6 +47,7 @@ export class HomeComponent implements OnInit {
       // console.log(this.optionArr);
       this.data.getArticleTag(message).subscribe((param: Article) => {
         this.articlesList = param;
+        this.p = 1;
       });
     });
   }
@@ -57,6 +59,7 @@ export class HomeComponent implements OnInit {
         this.articlesList = list;
         this.loaded = true;
         this.optionArr[2] = "";
+        this.p = 1;
       });
     } else if (event === this.optionArr[1]) {
       this.currIndex = 1;
@@ -64,6 +67,7 @@ export class HomeComponent implements OnInit {
         this.articlesList = list;
         this.loaded = true;
         this.optionArr[2] = "";
+        this.p = 1;
       });
     }
   }
