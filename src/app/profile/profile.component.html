@@ -47,6 +47,7 @@
             </li>
           </ul>
         </div>
+        <p id="notis"  *ngIf="!articles[0]"> No articles to display...</p>
         <div *ngFor="let article of articles">
           <app-articles [article]="article"></app-articles>
         </div>
