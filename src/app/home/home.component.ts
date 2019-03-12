@@ -1,25 +1,32 @@
-import { AuthService } from './../auth/auth.service';
-import { Article } from './../models/article.model';
-import { Author } from './../models/author.model';
-import { DataService } from './../data.service';
-import { Component, OnInit } from '@angular/core';
+import { AuthService } from "./../auth/auth.service";
+import { Article } from "./../models/article.model";
+import { Author } from "./../models/author.model";
+import { DataService } from "./../data.service";
+import { Component, OnInit } from "@angular/core";
+import { TagService } from "./tag.service";
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: "app-home",
+  templateUrl: "./home.component.html",
+  styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
   articlesList: Article;
   condition: boolean;
   loggedIn: boolean;
   loaded = false;
+  optionArr = ["Global Feed", "Your Feed", ""];
+  currIndex = 0;
 
-  constructor(private auth: AuthService, private data: DataService) { }
+  constructor(
+    private auth: AuthService,
+    private data: DataService,
+    private tagservice: TagService
+  ) {}
 
   ngOnInit() {
     this.auth.isAuthentiCated();
-    this.auth.isAuthenticate.subscribe((boo) => {
+    this.auth.isAuthenticate.subscribe(boo => {
       this.condition = boo;
 
       if (this.condition) {
@@ -29,22 +36,34 @@ export class HomeComponent implements OnInit {
         this.loggedIn = false;
       }
     });
-    this.onChange('Global Feed');
+    this.currIndex = 0;
+    this.onChange(this.optionArr[0]);
+    this.tagservice.currentMessage.subscribe(message => {
+      this.optionArr[2] = message;
+      if (this.optionArr[2] !== "") {
+        this.currIndex = 2;
+      }
+      console.log(this.optionArr);
+      this.data.getArticleTag(message).subscribe((param: Article) => {
+        this.articlesList = param;
+      });
+    });
   }
 
   onChange(event) {
-    if (event === 'Global Feed') {
-      this.condition = false;
+    if (event === this.optionArr[0]) {
+      this.currIndex = 0;
       this.data.getAllArticles().subscribe((list: Article) => {
         this.articlesList = list;
         this.loaded = true;
+        this.optionArr[2] = "";
       });
-    }
-    else if (event === 'Your Feed') {
-      this.condition = true;
+    } else if (event === this.optionArr[1]) {
+      this.currIndex = 1;
       this.data.getUserArticles().subscribe((list: Article) => {
         this.articlesList = list;
         this.loaded = true;
+        this.optionArr[2] = "";
       });
     }
   }
@@ -59,7 +78,5 @@ export class HomeComponent implements OnInit {
       article.favoritesCount -= 1;
       this.data.unfavouritePost(article.slug).subscribe();
     }
-
   }
-
 }

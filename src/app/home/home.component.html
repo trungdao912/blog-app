@@ -12,10 +12,13 @@
           <div class="feed-toggle">
               <ul class="nav nav-pills outline-active">
                 <li class="nav-item">
-                  <a class="nav-link" (click)="onChange($event.target.textContent)" [ngClass]="{active: condition}" *ngIf="loggedIn">Your Feed</a>
+                  <a class="nav-link" (click)="onChange($event.target.textContent)" [ngClass]="{active: currIndex === 1}" *ngIf="loggedIn">Your Feed</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" (click)="onChange($event.target.textContent)" [ngClass]="{active: !condition}">Global Feed</a>
+                  <a class="nav-link" (click)="onChange($event.target.textContent)" [ngClass]="{active: currIndex === 0}">Global Feed</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" *ngIf="optionArr[2] !== ''" [ngClass]="{active: currIndex === 2}">#{{ optionArr[2] }}</a>
                 </li>
               </ul>
             </div>

@@ -96,6 +96,9 @@ export class DataService {
   getArticle(slug: string) {
     return this.http.get(`${this.ALL_ARTICLES_URL}/${slug}`);
   }
+  getArticleTag(tag:string){
+    return this.http.get(`${this.ALL_ARTICLES_URL}/?tag=${tag}`);
+  }
 
   getAllUserArticle(username: string) {
     return this.http.get(this.ALL_ARTICLES_URL, {
