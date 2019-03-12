@@ -2,7 +2,7 @@
   <div class="container page">
     <div class="row">
       <div class="col-md-10 offset-md-1 col-xs-12">
-        <form [formGroup]="articleForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="articleForm">
           <fieldset>
             <fieldset class="form-group">
                 <input
@@ -33,10 +33,17 @@
                   type="text"
                   class="form-control"
                   placeholder="Enter tags"
-                  formControlName="tagList"
-                  ><div class="tag-list"></div>
+                  formControlName="tagField"
+                  (keyup.enter)="addTag()"
+                  ><div class="tag-list">
+                    <span *ngFor="let tag of tagList"
+                      class="tag-default tag-pill">
+                      <i class="ion-close-round" (click)="removeTag(tag)"></i>
+                      {{ tag }}
+                    </span>
+                  </div>
             </fieldset>
-            <button class="btn btn-lg pull-xs-right btn-primary" type="submit">
+            <button class="btn btn-lg pull-xs-right btn-primary" type="button" (click)="onSubmit()">
                 Publish Article
             </button>
           </fieldset>
