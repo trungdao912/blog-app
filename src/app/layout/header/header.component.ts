@@ -13,9 +13,14 @@ export class HeaderComponent implements OnInit {
   profile: User;
 
   constructor(private auth: AuthService, private data: DataService) {
-    this.data.getUser().subscribe((user: User) => {
-      this.profile = user;
-    });
+    this.auth.isAuthenticate.subscribe((boo) => {
+      this.condition = boo;
+      if (boo) {
+        this.data.getUser().subscribe((user: User) => {
+          this.profile = user;
+        });
+      }
+    })
   }
 
   ngOnInit() {

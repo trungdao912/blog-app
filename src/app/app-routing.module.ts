@@ -1,3 +1,5 @@
+import { AuthGuard } from './auth/auth-guard.service';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -14,7 +16,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'signin', component: SigninComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'settings', component: SettingComponent },
+  { path: 'settings', component: SettingComponent, canActivate: [AuthGuard] },
   {path: 'editor', component: NewArticleComponent},
   {
     path: ':username',
@@ -29,7 +31,8 @@ const routes: Routes = [
     resolve: {
       profile: ResolveArticleIdService
     }
-  }
+  },
+  { path: '**', component: PagenotfoundComponent }
 ];
 
 @NgModule({

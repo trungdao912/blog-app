@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
       if (this.optionArr[2] !== "") {
         this.currIndex = 2;
       }
-      console.log(this.optionArr);
+      // console.log(this.optionArr);
       this.data.getArticleTag(message).subscribe((param: Article) => {
         this.articlesList = param;
       });

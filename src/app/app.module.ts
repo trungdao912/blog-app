@@ -21,6 +21,7 @@ import { ArticleInfomationComponent } from './articles/article-infomation/articl
 import { SettingComponent } from './setting/setting.component';
 import { CommentComponent } from './articles/comment/comment.component';
 import { NewArticleComponent } from './articles/new-article/new-article.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { NewArticleComponent } from './articles/new-article/new-article.componen
     ArticleInfomationComponent,
     SettingComponent,
     CommentComponent,
-    NewArticleComponent
+    NewArticleComponent,
+    PagenotfoundComponent
   ],
   imports: [
     BrowserModule,

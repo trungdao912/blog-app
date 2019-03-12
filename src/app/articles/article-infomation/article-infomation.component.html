@@ -4,10 +4,10 @@
       <h1>{{ articleInfor.title }}</h1>
 
       <div class="article-meta">
-        <a routerLink="/{{ articleInfor.author.username }}"><img src="{{ articleInfor.author.image }}"/></a>
+        <a routerLink="/{{ articleInfor.author.username }}"><img src="{{ articleInfor?.author.image }}"/></a>
         <div class="info">
-          <a routerLink="/{{ articleInfor.author.username }}" class="author">{{ articleInfor.author.username }}</a>
-          <span class="date">{{ articleInfor.createdAt | date }}</span>
+          <a routerLink="/{{ articleInfor.author.username }}" class="author">{{ articleInfor?.author.username }}</a>
+          <span class="date">{{ articleInfor?.createdAt | date }}</span>
         </div>
         <button class="btn btn-sm btn-outline-secondary" *ngIf="articleInfor.author.username === isUser()">
           <i class="ion-plus-round"></i>
@@ -38,9 +38,9 @@
   <div class="container page">
     <div class="row article-content">
       <div class="col-md-12">
-        <h2 id="introducing-ionic">{{ articleInfor.description }}</h2>
+        <h2 id="introducing-ionic">{{ articleInfor?.description }}</h2>
         <p>
-          {{ articleInfor.body }}
+          {{ articleInfor?.body }}
         </p>
       </div>
     </div>
@@ -49,7 +49,7 @@
 
     <div class="article-actions">
       <div class="article-meta">
-        <a href=""><img src="{{ articleInfor.author.image }}"/></a>
+        <a href=""><img src="{{ articleInfor?.author.image }}"/></a>
         <div class="info">
           <a href="" class="author">{{ articleInfor.author.username }}</a>
           <span class="date">{{ articleInfor.createdAt | date }}</span>

@@ -2,7 +2,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { Article } from './../models/article.model';
 import { Profile } from './../models/profile.model';
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { map } from "rxjs/operators";
 import { DataService } from "../data.service";
 import { Author } from '../models/author.model';
@@ -34,7 +34,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private dataService: DataService,
-    private auth: AuthService
+    private auth: AuthService,
+    private route: Router
   ) {
 
   }
@@ -49,7 +50,9 @@ export class ProfileComponent implements OnInit {
     .subscribe(data => {
       this.dataService.getProfile(data.username).subscribe((params: { profile: Profile }) => {
         this.profileInfo = params.profile;
-      });
+      }, ((err) => {
+        this.route.navigateByUrl('/')
+      }));
     });
     this.myArticleLoad();
   }
@@ -68,7 +71,6 @@ export class ProfileComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       this.dataService.getFavouriteArticle(params.username).subscribe((articleLists: Article) => {
         this.articles = articleLists.articles;
-        console.log(this.articles);
       });
     });
   }

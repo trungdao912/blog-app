@@ -33,7 +33,7 @@
         />
       </a>
       &nbsp;
-      <a href="" class="comment-author">{{ item?.author.username }}</a>
+      <a class="comment-author" routerLink="/{{ item?.author.username  }}">{{ item?.author.username }}</a>
       <span class="date-posted">{{ item?.createdAt }}</span>
       <button class="btn btn-sm btn-danger"
       (click)="delete(item.id)"
