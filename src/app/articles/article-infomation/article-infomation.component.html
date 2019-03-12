@@ -78,7 +78,7 @@
         </p>
         <div class="sidebar">
           <div class="tag-list" *ngFor="let tag of articleInfor?.tagList">
-            <a class="tag-pill tag-default ">{{ tag }}</a>
+            <a class="tag-pill tag-default tag-outline">{{ tag }}</a>
           </div>
         </div>
       </div>
@@ -91,7 +91,7 @@
         <a href=""><img src="{{ articleInfor?.author.image }}"/></a>
         <div class="info">
           <a href="" class="author">{{ articleInfor.author.username }}</a>
-          <span class="date">{{ articleInfor.createdAt | date }}</span>
+          <span class="date">{{ articleInfor.createdAt | date :'MMM d, y, h:mm:ss a' }}</span>
         </div>
         <button
           class="btn btn-sm btn-outline-secondary"

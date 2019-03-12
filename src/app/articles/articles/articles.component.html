@@ -4,7 +4,7 @@
     <a><img src="{{ article?.author.image }}" alt="page.png"></a>
     <div class="info">
       <a class="author">{{ article?.author.username }}</a>
-      <span class="date">{{ article?.createdAt }}</span>
+      <span class="date">{{ article?.createdAt | date :'MMM d, y, h:mm:ss a' }}</span>
     </div>
     <button
       [ngClass]="{ like: article?.favorited }"
@@ -17,7 +17,7 @@
   </div>
   <a class="preview-link" routerLink="/article/{{ article?.slug }}">
     <h1>
-      {{ article?.body }}
+      {{ article?.title }}
     </h1>
     <p>{{ article?.description }}</p>
     <span>Read more...</span>
