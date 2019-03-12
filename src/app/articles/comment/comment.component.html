@@ -3,13 +3,13 @@
     <textarea
       class="form-control"
       placeholder="Write a comment..."
-      rows="3" 
+      rows="3"
       #input
     ></textarea>
   </div>
   <div class="card-footer">
     <img
-      src="{{ user.user.image }}"
+      src="{{ user.image }}"
       class="comment-author-img"
     />
     <button class="btn btn-sm btn-primary"
@@ -37,7 +37,7 @@
       <span class="date-posted">{{ item?.createdAt }}</span>
       <button class="btn btn-sm btn-danger"
       (click)="delete(item.id)"
-      *ngIf="user.user.username == item?.author.username"
+      *ngIf="user == item?.author.username"
       >Delete</button>
     </div>
   </div>

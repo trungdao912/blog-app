@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { DataService } from '../data.service';
 import { User } from './../models/user.model';
+import { Router } from '@angular/router';
+import { getToken } from '@angular/router/src/utils/preactivation';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,7 @@ export class AuthService {
   public isAuthenticated = new BehaviorSubject<boolean>(false);
   public isAuthenticate = this.isAuthenticated.asObservable();
 
-  constructor(private data: DataService) {
+  constructor(private data: DataService, private router: Router) {
     this.user = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.userEmit = this.user.asObservable();
   }
@@ -29,12 +31,13 @@ export class AuthService {
     this.currentUser.subscribe((user: {"email": string, "password": string}) => {
       this.data.getUserLogInInfo(user.email, user.password).subscribe((userInfo: User) => {
         if (userInfo && userInfo.user.token) {
+          this.router.navigateByUrl('/');
           localStorage.setItem('currentUser', JSON.stringify(userInfo));
           // this.user.next(userInfo);
           this.isAuthenticated.next(true);
         }
-      })
-    })
+      });
+    });
   }
 
   logout() {
@@ -57,7 +60,14 @@ export class AuthService {
   }
 
   checkUser() {
-    return JSON.parse(localStorage.getItem('currentUser'));
+    if (this.getToken()) {
+      return JSON.parse(localStorage.getItem('currentUser')).user.username;
+    }
+    return;
+  }
+
+  userInfo() {
+    return JSON.parse(localStorage.getItem('currentUser')).user;
   }
 
   updateUserInFoInLocalStorage(newUser) {

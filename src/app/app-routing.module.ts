@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'signin', component: SigninComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'settings', component: SettingComponent, canActivate: [AuthGuard] },
-  {path: 'editor', component: NewArticleComponent},
+  {path: 'editor', component: NewArticleComponent, canActivate: [AuthGuard]},
   {
     path: ':username',
     component: ProfileComponent,

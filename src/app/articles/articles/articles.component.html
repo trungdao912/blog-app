@@ -1,6 +1,6 @@
 <div class="article-preview">
   <div class="article-meta" routerLink="/{{ article?.author.username }}">
-    
+
     <a><img src="{{ article?.author.image }}" alt="page.png"></a>
     <div class="info">
       <a class="author">{{ article?.author.username }}</a>
@@ -10,6 +10,7 @@
       [ngClass]="{ like: article?.favorited }"
       appDebounceClick
       (debounceClick)="react(article)"
+      [disabled]="!condition"
       class="btn btn-outline-primary btn-sm pull-xs-right"
     >
       <i class="ion-heart"></i> {{ article?.favoritesCount }}
@@ -25,5 +26,5 @@
       <li class="tag-default tag-pill tag-outline">{{ listtag }}</li>
     </ul>
   </a>
- 
+
 </div>

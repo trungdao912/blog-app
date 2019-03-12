@@ -13,7 +13,16 @@ import { AuthService } from "src/app/auth/auth.service";
 })
 export class CommentComponent implements OnInit {
   comment;
-  user: User;
+  user: {
+    id: number;
+    email: string;
+    createdAt: string;
+    updatedAt: string;
+    username: string;
+    bio: null;
+    image: string;
+    token: string;
+  };
   ArticlesId: string;
   constructor(
     private activateRoute: ActivatedRoute,

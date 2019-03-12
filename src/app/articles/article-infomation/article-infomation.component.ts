@@ -24,7 +24,7 @@ export class ArticleInfomationComponent implements OnInit {
        return data.profile.article
       })
     ).subscribe((data: ArticleInfor) =>{
-     
+
       this.articleInfor = data;
       console.log(data)
     });
@@ -34,7 +34,7 @@ export class ArticleInfomationComponent implements OnInit {
   }
 
   isUser() {
-    return this.auth.checkUser().user.username;
+    return this.auth.checkUser();
   }
 
   followUser(articleInfor) {

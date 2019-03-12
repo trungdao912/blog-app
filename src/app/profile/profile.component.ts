@@ -50,6 +50,7 @@ export class ProfileComponent implements OnInit {
           (params: { profile: Profile }) => {
             this.condition =false
             this.profileInfo = params.profile;
+            console.log(this.profileInfo);
             this.p = 1;
           },
           err => {
@@ -79,13 +80,13 @@ export class ProfileComponent implements OnInit {
         .getFavouriteArticle(params.username)
         .subscribe((articleLists: Article) => {
           this.articles = articleLists.articles;
-          this.p = 1
+          this.p = 1;
         });
     });
   }
 
   isUser() {
-    return this.auth.checkUser().user.username;
+    return this.auth.checkUser();
   }
 
   followUser(profileInfo) {
