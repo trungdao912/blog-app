@@ -1,11 +1,12 @@
 <div>
-    <p>Popular Tags</p>
+  <p>Popular Tags</p>
   <div class="sidebar">
-    
-
-    <div class="tag-list" *ngFor="let item of taglist"
-    (click)="currenttag(item)">
-      <a  class="tag-pill tag-default">{{ item }}</a>
+    <div
+      class="tag-list"
+      *ngFor="let item of taglist"
+      (click)="currenttag(item)"
+    >
+      <a class="tag-pill tag-default">{{ item }}</a>
     </div>
   </div>
 </div>

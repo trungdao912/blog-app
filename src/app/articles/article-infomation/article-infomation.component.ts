@@ -24,8 +24,9 @@ export class ArticleInfomationComponent implements OnInit {
        return data.profile.article
       })
     ).subscribe((data: ArticleInfor) =>{
-      console.log(data);
+     
       this.articleInfor = data;
+      console.log(data)
     });
   }
 
