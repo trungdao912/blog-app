@@ -13,6 +13,8 @@ import { Router } from '@angular/router';
 export class SettingComponent implements OnInit {
   currentUser: User;
   settingForm: FormGroup;
+  errors;
+
   constructor(private auth: AuthService, private data: DataService, private router: Router) { }
 
   ngOnInit() {
@@ -36,6 +38,8 @@ export class SettingComponent implements OnInit {
         this.auth.updateUserInFoInLocalStorage(data);
         this.auth.user.next(data);
         return;
+      }, (err) => {
+        this.errors = err;
       });
   }
 
