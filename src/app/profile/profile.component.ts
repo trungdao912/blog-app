@@ -86,7 +86,11 @@ export class ProfileComponent implements OnInit {
   }
 
   isUser() {
-    return this.auth.checkUser();
+    if (this.auth.checkUser()) {
+      return this.auth.checkUser().user.username;
+    } else {
+      return false;
+    }
   }
 
   followUser(profileInfo) {
