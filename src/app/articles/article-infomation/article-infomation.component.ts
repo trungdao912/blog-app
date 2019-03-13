@@ -26,7 +26,6 @@ export class ArticleInfomationComponent implements OnInit {
     ).subscribe((data: ArticleInfor) =>{
 
       this.articleInfor = data;
-      console.log(data)
     });
   }
 

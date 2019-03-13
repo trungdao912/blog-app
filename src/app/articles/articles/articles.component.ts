@@ -35,7 +35,7 @@ export class ArticlesComponent implements OnInit {
   ngOnInit() {
     this.auth.isAuthenticate.subscribe((boo) => {
       this.condition = boo;
-    })
+    });
   }
   react(item) {
     if (item.favorited === false) {

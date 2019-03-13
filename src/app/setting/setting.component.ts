@@ -11,27 +11,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./setting.component.css']
 })
 export class SettingComponent implements OnInit {
-  currentUser: {
-    id: number;
-    email: string;
-    createdAt: string;
-    updatedAt: string;
-    username: string;
-    bio: null;
-    image: string;
-    token: string;
-  };
+  currentUser: User;
   settingForm: FormGroup;
   constructor(private auth: AuthService, private data: DataService, private router: Router) { }
 
   ngOnInit() {
-    this.currentUser = this.auth.userInfo();
+    this.currentUser = this.auth.checkUser();
 
     this.settingForm = new FormGroup({
-      'image': new FormControl(this.currentUser.image),
-      'username': new FormControl(this.currentUser.username),
-      'bio': new FormControl(this.currentUser.bio),
-      'email': new FormControl(this.currentUser.email, [Validators.email]),
+      'image': new FormControl(this.currentUser.user.image),
+      'username': new FormControl(this.currentUser.user.username),
+      'bio': new FormControl(this.currentUser.user.bio),
+      'email': new FormControl(this.currentUser.user.email, [Validators.email]),
       'password': new FormControl(null)
     });
   }

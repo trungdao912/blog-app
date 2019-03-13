@@ -9,7 +9,7 @@
   </div>
   <div class="card-footer">
     <img
-      src="{{ user.image }}"
+      src="{{ user.user.image }}"
       class="comment-author-img"
     />
     <button class="btn btn-sm btn-primary"
@@ -37,7 +37,7 @@
       <span class="date-posted">{{ item?.createdAt }}</span>
       <button class="btn btn-sm btn-danger"
       (click)="delete(item.id)"
-      *ngIf="user == item?.author.username"
+      *ngIf="user.user.username == item?.author.username"
       >Delete</button>
     </div>
   </div>

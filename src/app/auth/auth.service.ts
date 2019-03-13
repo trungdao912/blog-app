@@ -60,14 +60,7 @@ export class AuthService {
   }
 
   checkUser() {
-    if (this.getToken()) {
-      return JSON.parse(localStorage.getItem('currentUser')).user.username;
-    }
-    return;
-  }
-
-  userInfo() {
-    return JSON.parse(localStorage.getItem('currentUser')).user;
+      return JSON.parse(localStorage.getItem('currentUser'));
   }
 
   updateUserInFoInLocalStorage(newUser) {
