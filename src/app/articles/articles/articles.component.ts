@@ -1,14 +1,14 @@
-import { AuthService } from "./../../auth/auth.service";
-import { Component, OnInit, Input } from "@angular/core";
-import { DataService } from "src/app/data.service";
-import { Article } from "src/app/models/article.model";
-import { Author } from "src/app/models/author.model";
-import { Router } from "@angular/router";
+import { AuthService } from './../../auth/auth.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { DataService } from 'src/app/data.service';
+import { Article } from 'src/app/models/article.model';
+import { Author } from 'src/app/models/author.model';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: "app-articles",
-  templateUrl: "./articles.component.html",
-  styleUrls: ["./articles.component.css"]
+  selector: 'app-articles',
+  templateUrl: './articles.component.html',
+  styleUrls: ['./articles.component.css']
 })
 export class ArticlesComponent implements OnInit {
   condition: boolean;

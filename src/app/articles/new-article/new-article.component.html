@@ -3,7 +3,11 @@
     <div class="row">
       <div class="col-md-10 offset-md-1 col-xs-12">
           <ul class="error-messages">
-              <li>That email is already taken</li>
+              <li *ngIf="!(articleForm.controls.title.valid && articleForm.controls.title.touched) && isSubmitted">title can't be blank</li>
+              <li *ngIf="!(articleForm.controls.title.valid && articleForm.controls.title.touched && articleForm.controls.title.dirty) && isSubmitted">title is too short (minimum is 1 character)</li>
+              <li *ngIf="!(articleForm.controls.body.valid && articleForm.controls.body.touched && articleForm.controls.body.dirty) && isSubmitted">body can't be blank</li>
+              <li *ngIf="!(articleForm.controls.description.valid && articleForm.controls.description.touched && articleForm.controls.description.dirty) && isSubmitted">description can't be blank</li>
+              <li *ngIf="!(articleForm.controls.description.valid && articleForm.controls.description.touched && articleForm.controls.description.dirty) && isSubmitted">description is too short (minimum is 1 character)</li>
           </ul>
 
         <form [formGroup]="articleForm">

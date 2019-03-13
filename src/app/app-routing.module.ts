@@ -11,6 +11,7 @@ import { ArticleInfomationComponent } from './articles/article-infomation/articl
 import { NewArticleComponent } from './articles/new-article/new-article.component';
 import { SettingComponent } from './setting/setting.component';
 import { ResolveArticleIdService } from './articles/resolve-article-id.service';
+import { ResoleNewArticleService } from './articles/new-article/resole-new-article.service';
 import { CanDeactivateGuardService } from './auth/can-deactivate-guard.service';
 
 const routes: Routes = [
@@ -18,7 +19,12 @@ const routes: Routes = [
   { path: 'signin', component: SigninComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'settings', component: SettingComponent, canActivate: [AuthGuard] },
-  {path: 'editor', component: NewArticleComponent, canActivate: [AuthGuard], canDeactivate: [CanDeactivateGuardService]},
+  {path: 'editor', component: NewArticleComponent, canActivate: [AuthGuard], canDeactivate: [CanDeactivateGuardService], children: [
+    {path: ':slug', component: NewArticleComponent ,
+      resolve: {
+        profile: ResoleNewArticleService
+      }}
+  ]},
   {
     path: ':username',
     component: ProfileComponent,

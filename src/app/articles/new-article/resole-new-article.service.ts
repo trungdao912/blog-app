@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
-import { DataService } from '../data.service';
+import { DataService } from 'src/app/data.service';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ResolveArticleIdService implements Resolve<any> {
+export class ResoleNewArticleService implements Resolve<any> {
+
   constructor(
     private data: DataService
     ) {}
@@ -14,6 +15,6 @@ export class ResolveArticleIdService implements Resolve<any> {
     route: import('@angular/router').ActivatedRouteSnapshot,
     state: import('@angular/router').RouterStateSnapshot
   ): Observable<any> {
-    return this.data.getArticle(route.params['id']);
+    return this.data.getArticle(route.params['slug']);
   }
 }
