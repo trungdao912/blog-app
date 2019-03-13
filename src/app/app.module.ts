@@ -23,6 +23,7 @@ import { CommentComponent } from './articles/comment/comment.component';
 import { NewArticleComponent } from './articles/new-article/new-article.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import {NgxPaginationModule} from 'ngx-pagination'; 
+import { NgxLoadingModule } from 'ngx-loading';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgxLoadingModule.forRoot({})
   ],
   providers: [
     {

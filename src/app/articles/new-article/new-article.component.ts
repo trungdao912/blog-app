@@ -19,8 +19,8 @@ export class NewArticleComponent implements OnInit {
 
   ngOnInit() {
     this.articleForm = new FormGroup({
-      'title': new FormControl('', [Validators.required]),
-      'description': new FormControl('', [Validators.required]),
+      'title': new FormControl('', [Validators.required, Validators.minLength(1)]),
+      'description': new FormControl('', [Validators.required, Validators.minLength(1)]),
       'body': new FormControl('', [Validators.required]),
       'tagField': new FormControl('')
     });
