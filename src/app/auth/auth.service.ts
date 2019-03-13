@@ -36,7 +36,10 @@ export class AuthService {
           // this.user.next(userInfo);
           this.isAuthenticated.next(true);
         }
-      });
+      }, ((errors) => {
+        this.isAuthenticated.next(false);
+        // console.log(errors);
+      }));
     });
   }
 

@@ -10,10 +10,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class SigninComponent implements OnInit {
   myForm: FormGroup;
+  isSubmitted: boolean;
+  isAuthenticated: boolean;
 
-  constructor(private form: FormBuilder, private auth: AuthService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private form: FormBuilder,
+    private auth: AuthService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
+    this.isSubmitted = false;
     this.myForm = this.form.group({
       email: ['', Validators.email],
       password: ['', Validators.required]
@@ -21,12 +25,19 @@ export class SigninComponent implements OnInit {
   }
 
   onSubmit() {
-    this.auth.emitSignInValue({
-      "email": this.myForm.get('email').value,
-      "password": this.myForm.get('password').value
-    })
 
-    this.auth.login();
-    this.router.navigateByUrl('/');
+    this.isSubmitted = true;
+
+    if (this.myForm.valid) {
+      this.auth.emitSignInValue({
+        'email': this.myForm.get('email').value,
+        'password': this.myForm.get('password').value
+      });
+      this.auth.login();
+      // this.router.navigateByUrl('/');
+    }
+    this.auth.isAuthenticate.subscribe(val => {
+      this.isAuthenticated = val;
+    });
   }
 }

@@ -24,6 +24,7 @@ import { NewArticleComponent } from './articles/new-article/new-article.componen
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import {NgxPaginationModule} from 'ngx-pagination'; 
 import { NgxLoadingModule } from 'ngx-loading';
+import { MarkdownPipe } from './articles/markdown.pipe';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { NgxLoadingModule } from 'ngx-loading';
     SettingComponent,
     CommentComponent,
     NewArticleComponent,
-    PagenotfoundComponent
+    PagenotfoundComponent,
+    MarkdownPipe
   ],
   imports: [
     BrowserModule,

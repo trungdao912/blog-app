@@ -32,22 +32,34 @@ export class NewArticleComponent implements OnInit {
               }
 
   ngOnInit() {
-
+    // console.log(this.articleForm.valid);
+    // if (this.articleForm.valid) {
+    //   this.articleForm.reset();
+    // }
     this.isSubmitted = false;
-
-    this.route.firstChild.data.pipe(map((val) => {
-      return val.profile.article;
-    }))
-    .subscribe((data: ArticleInfor) => {
-      this.articleInfor = data;
+    // console.log(this.route.firstChild);
+    if (!this.route.firstChild) {
       this.articleForm.patchValue({
-        'title': this.articleInfor.title,
-        'description': this.articleInfor.description,
-        'body': this.articleInfor.body
+        'title': '',
+        'description': '',
+        'body': ''
       });
-      this.tagList = this.articleInfor.tagList;
-    });
-
+      this.tagList = [];
+    }
+    else {
+      this.route.firstChild.data.pipe(map((val) => {
+        return val.profile.article;
+      }))
+      .subscribe((data: ArticleInfor) => {
+        this.articleInfor = data;
+        this.articleForm.patchValue({
+          'title': this.articleInfor.title,
+          'description': this.articleInfor.description,
+          'body': this.articleInfor.body
+        });
+        this.tagList = this.articleInfor.tagList;
+      });
+    }
   }
 
   addTag() {
@@ -67,12 +79,15 @@ export class NewArticleComponent implements OnInit {
 
    onSubmit() {
     // console.log('NewForm');
-    console.log(this.articleForm);
+    // console.log(this.articleForm);
     // tslint:disable-next-line:max-line-length
-    this.data.createArticles(this.articleForm.value.title, this.articleForm.value.description, this.articleForm.value.body, this.tagList).subscribe(data => {
-      this.router.navigateByUrl('/');
-      return;
-    });
+    if (this.articleForm.valid) {
+      // tslint:disable-next-line:max-line-length
+      this.data.createArticles(this.articleForm.value.title, this.articleForm.value.description, this.articleForm.value.body, this.tagList).subscribe(data => {
+        this.router.navigateByUrl('/');
+        return;
+      });
+    }
     this.isSubmitted = true;
    }
 }
