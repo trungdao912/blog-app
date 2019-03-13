@@ -15,7 +15,7 @@ import { ResoleNewArticleService } from './articles/new-article/resole-new-artic
 import { CanDeactivateGuardService } from './auth/can-deactivate-guard.service';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'signin', component: SigninComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'settings', component: SettingComponent, canActivate: [AuthGuard] },
@@ -43,7 +43,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
