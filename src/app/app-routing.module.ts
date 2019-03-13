@@ -12,13 +12,14 @@ import { NewArticleComponent } from './articles/new-article/new-article.componen
 import { SettingComponent } from './setting/setting.component';
 import { ResolveArticleIdService } from './articles/resolve-article-id.service';
 import { ResoleNewArticleService } from './articles/new-article/resole-new-article.service';
+import { CanDeactivateGuardService } from './auth/can-deactivate-guard.service';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'signin', component: SigninComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'settings', component: SettingComponent, canActivate: [AuthGuard] },
-  {path: 'editor', component: NewArticleComponent, canActivate: [AuthGuard], children: [
+  {path: 'editor', component: NewArticleComponent, canActivate: [AuthGuard], canDeactivate: [CanDeactivateGuardService], children: [
     {path: ':slug', component: NewArticleComponent ,
       resolve: {
         profile: ResoleNewArticleService

@@ -9,8 +9,8 @@ import { getToken } from '@angular/router/src/utils/preactivation';
   providedIn: 'root'
 })
 export class AuthService {
-  public currentUserInfo = new BehaviorSubject<Object>({});
-  public currentUser = this.currentUserInfo.asObservable();
+  // public currentUserInfo = new BehaviorSubject<Object>({});
+  // public currentUser = this.currentUserInfo.asObservable();
 
   public user: BehaviorSubject<User>;
   public userEmit: Observable<User>;
@@ -18,29 +18,32 @@ export class AuthService {
   public isAuthenticated = new BehaviorSubject<boolean>(false);
   public isAuthenticate = this.isAuthenticated.asObservable();
 
+  public errorsMess = new BehaviorSubject<Object>({});
+  public errorsMessNew = this.errorsMess.asObservable();
+
   constructor(private data: DataService, private router: Router) {
     this.user = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.userEmit = this.user.asObservable();
   }
 
-  emitSignInValue(loginInfo: {}) {
-    this.currentUserInfo.next(loginInfo);
-  }
+  // emitSignInValue(loginInfo: {}) {
+  //   this.currentUserInfo.next(loginInfo);
+  // }
 
-  login() {
-    this.currentUser.subscribe((user: {"email": string, "password": string}) => {
-      this.data.getUserLogInInfo(user.email, user.password).subscribe((userInfo: User) => {
+  login(email, password) {
+    // this.currentUser.subscribe((user: {"email": string, "password": string}) => {
+      this.data.getUserLogInInfo(email, password).subscribe((userInfo: User) => {
         if (userInfo && userInfo.user.token) {
           this.router.navigateByUrl('/');
           localStorage.setItem('currentUser', JSON.stringify(userInfo));
           // this.user.next(userInfo);
           this.isAuthenticated.next(true);
+          this.errorsMess.next({});
         }
       }, ((errors) => {
-        this.isAuthenticated.next(false);
-        // console.log(errors);
+        this.errorsMess.next(errors);
       }));
-    });
+    // });
   }
 
   logout() {
