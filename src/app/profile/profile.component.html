@@ -20,6 +20,7 @@
             <button
               class="btn btn-sm btn-outline-secondary action-btn"
               *ngIf="!(profileInfo?.username == isUser())"
+              [disabled]="!isUser()"
             >
               <i class="fas fa-cog"></i>
               &nbsp;

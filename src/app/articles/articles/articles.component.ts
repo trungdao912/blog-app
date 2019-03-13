@@ -3,6 +3,7 @@ import { Component, OnInit, Input } from "@angular/core";
 import { DataService } from "src/app/data.service";
 import { Article } from "src/app/models/article.model";
 import { Author } from "src/app/models/author.model";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-articles",
@@ -10,7 +11,7 @@ import { Author } from "src/app/models/author.model";
   styleUrls: ["./articles.component.css"]
 })
 export class ArticlesComponent implements OnInit {
-  condition = true;
+  condition: boolean;
   data = true;
   @Input() article: {
     title: string;
@@ -25,9 +26,17 @@ export class ArticlesComponent implements OnInit {
     favoritesCount: number;
   };
 
-  constructor(private dataservice: DataService, private auth: AuthService) {}
+  constructor(
+    private dataservice: DataService,
+    private auth: AuthService,
+    private route: Router
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.auth.isAuthenticate.subscribe((boo) => {
+      this.condition = boo;
+    });
+  }
   react(item) {
     if (item.favorited === false) {
       item.favorited = true;

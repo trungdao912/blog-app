@@ -10,3 +10,7 @@ a {
 p {
     display: block;
 }
+
+.tag-list {
+  cursor: pointer;
+}
