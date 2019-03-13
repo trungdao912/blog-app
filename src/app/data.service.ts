@@ -104,7 +104,7 @@ export class DataService {
     return this.http.get(this.ALL_ARTICLES_URL, {
       params: {
         author: `${username}`,
-        limit: "5",
+        limit: "20",
         offset: "0"
       }
     });
@@ -114,7 +114,7 @@ export class DataService {
     return this.http.get(this.ALL_ARTICLES_URL, {
       params: {
         favorited: `${username}`,
-        limit: "5",
+        limit: "20",
         offset: "0"
       }
     });
