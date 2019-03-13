@@ -93,6 +93,10 @@ export class DataService {
     });
   }
 
+  deleteArticle(slug) {
+    return this.http.delete(`${this.ALL_ARTICLES_URL}/${slug}`);
+  }
+
   getArticle(slug: string) {
     return this.http.get(`${this.ALL_ARTICLES_URL}/${slug}`);
   }

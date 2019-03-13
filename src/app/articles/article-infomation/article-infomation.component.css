@@ -1,3 +1,24 @@
 .tag-list {
   display: inline-block;
 }
+
+.delete {
+  background-color: #373a3c;
+  color: #ccc;
+  border-color: #B85C5C;
+}
+
+.delete:hover {
+  background-color: #B85C5C;
+}
+
+.delete2 {
+  background-color: white;
+  color: #B85C5C;
+  border-color: #B85C5C;
+}
+
+.delete2:hover {
+  color: white;
+  background-color: #B85C5C;
+}
