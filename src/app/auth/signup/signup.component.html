@@ -7,9 +7,15 @@
           <a [routerLink]="['/signin']">Have an account?</a>
         </p>
 
-        <!-- <ul class="error-messages">
-          <li>That email is already taken</li>
-        </ul> -->
+        <ul class="error-messages name">
+          <li *ngFor="let errName of errors?.error.errors.username">username {{ errName }}</li>
+        </ul>
+        <ul class="error-messages email">
+          <li *ngFor="let errEmail of errors?.error.errors.email">email {{ errEmail }}</li>
+        </ul>
+        <ul class="error-messages password">
+          <li *ngFor="let errPassword of errors?.error.errors.password">password {{ errPassword }}</li>
+        </ul>
 
         <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
           <fieldset class="form-group">
@@ -36,7 +42,7 @@
               formControlName="password"
             />
           </fieldset>
-          <button class="btn btn-lg btn-primary pull-xs-right" type="submit" [disabled]="!myForm.valid">
+          <button class="btn btn-lg btn-primary pull-xs-right" type="submit" >
             Sign up
           </button>
         </form>

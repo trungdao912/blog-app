@@ -11,6 +11,7 @@ import { DataService } from 'src/app/data.service';
 })
 export class SignupComponent implements OnInit {
   myForm: FormGroup;
+  errors;
 
   constructor(private form: FormBuilder, private data: DataService, private router: Router) { }
 
@@ -26,7 +27,9 @@ export class SignupComponent implements OnInit {
     this.data.registNewAcc(this.myForm.get('userName').value, this.myForm.get('email').value, this.myForm.get('password').value)
       .subscribe((feedback) => {
         this.router.navigateByUrl('/');
-      })
+      }, (errors) => {
+        this.errors = errors;
+      });
   }
 
 }

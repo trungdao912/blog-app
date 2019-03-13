@@ -13,6 +13,8 @@ import { DataService } from "src/app/data.service";
   styleUrls: ["./new-article.component.css"]
 })
 export class NewArticleComponent implements OnInit, CanComponentDeactivate {
+  @HostListener("window:beforeunload", ["$event"])
+
   submit = false;
   articleForm: FormGroup;
   // tagField = new FormControl('');
@@ -42,23 +44,34 @@ export class NewArticleComponent implements OnInit, CanComponentDeactivate {
   }
 
   ngOnInit() {
+    // console.log(this.articleForm.valid);
+    // if (this.articleForm.valid) {
+    //   this.articleForm.reset();
+    // }
     this.isSubmitted = false;
-
-    this.route.firstChild.data
-      .pipe(
-        map(val => {
-          return val.profile.article;
-        })
-      )
+    // console.log(this.route.firstChild);
+    if (!this.route.firstChild) {
+      this.articleForm.patchValue({
+        'title': '',
+        'description': '',
+        'body': ''
+      });
+      this.tagList = [];
+    }
+    else {
+      this.route.firstChild.data.pipe(map((val) => {
+        return val.profile.article;
+      }))
       .subscribe((data: ArticleInfor) => {
         this.articleInfor = data;
         this.articleForm.patchValue({
-          title: this.articleInfor.title,
-          description: this.articleInfor.description,
-          body: this.articleInfor.body
+          'title': this.articleInfor.title,
+          'description': this.articleInfor.description,
+          'body': this.articleInfor.body
         });
         this.tagList = this.articleInfor.tagList;
       });
+    }
   }
 
   addTag() {
@@ -78,7 +91,7 @@ export class NewArticleComponent implements OnInit, CanComponentDeactivate {
 
   onSubmit() {
     // console.log('NewForm');
-    // console.log(this.articleForm);
+    console.log(this.articleForm);
     // tslint:disable-next-line:max-line-length
     if (this.articleForm.valid) {
       this.submit = true;
@@ -109,7 +122,6 @@ export class NewArticleComponent implements OnInit, CanComponentDeactivate {
     }
   }
 
-  @HostListener("window:beforeunload", ["$event"])
   unloadNotification($event: any) {
     if (!this.canDeactivate()) {
       $event.returnValue = true;

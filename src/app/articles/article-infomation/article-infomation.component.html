@@ -25,8 +25,11 @@
         <button
           class="btn btn-sm btn-outline-primary"
           *ngIf="articleInfor.author.username === isUser()"
+          [ngClass]="{delete: (articleInfor.author.username === isUser())}"
+          (click)="onDelete(articleInfor)"
         >
-          <i class="ion-heart"></i>
+          <i class="ion-heart" *ngIf="!(articleInfor.author.username === isUser())"></i>
+          <i class="ion-trash-a" *ngIf="(articleInfor.author.username === isUser())"></i>
           &nbsp; Delete Article
         </button>
 
@@ -76,9 +79,7 @@
     <div class="row article-content">
       <div class="col-md-12">
         <h2 id="introducing-ionic">{{ articleInfor?.description }}</h2>
-        <p>
-          {{ articleInfor?.body }}
-        </p>
+        <div [innerHTML]="articleInfor?.body | markdown"></div>
         <div class="sidebar">
           <div class="tag-list" *ngFor="let tag of articleInfor?.tagList">
             <a class="tag-pill tag-default tag-outline">{{ tag }}</a>
@@ -108,8 +109,11 @@
         <button
           class="btn btn-sm btn-outline-primary"
           *ngIf="articleInfor.author.username === isUser()"
+          [ngClass]="{delete2: (articleInfor.author.username === isUser())}"
+          (click)="onDelete(articleInfor)"
         >
-          <i class="ion-heart"></i>
+        <i class="ion-heart" *ngIf="!(articleInfor.author.username === isUser())"></i>
+        <i class="ion-trash-a" *ngIf="(articleInfor.author.username === isUser())"></i>
           &nbsp; Delete Article
         </button>
 

@@ -1,7 +1,7 @@
 import { AuthService } from "src/app/auth/auth.service";
 import { Component, OnInit } from "@angular/core";
 import { DataService } from "src/app/data.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { map } from "rxjs/operators";
 import { ArticleInfor } from "src/app/models/aritcleInfor.model";
 import { Profile } from "selenium-webdriver/firefox";
@@ -16,7 +16,8 @@ export class ArticleInfomationComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private dataService: DataService,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) {
     this.activatedRoute.data
       .pipe(
@@ -75,5 +76,11 @@ export class ArticleInfomationComponent implements OnInit {
       .subscribe((val: { profile: Profile }) => {
         // this.following = val.profile.following;
       });
+  }
+
+  onDelete(articleInfor) {
+    this.dataService.deleteArticle(articleInfor.slug).subscribe((val) => {
+      this.router.navigateByUrl('/');
+    })
   }
 }
