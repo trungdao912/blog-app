@@ -16,6 +16,7 @@
         <button
           class="btn btn-sm btn-outline-secondary"
           *ngIf="articleInfor.author.username === isUser()"
+          [routerLink]="['/editor', articleInfor.slug]"
         >
           <i class="ion-plus-round"></i>
           &nbsp;Edit Article
@@ -98,6 +99,7 @@
         <button
           class="btn btn-sm btn-outline-secondary"
           *ngIf="articleInfor.author.username === isUser()"
+          [routerLink]="['/editor', articleInfor.slug]"
         >
           <i class="ion-plus-round"></i>
           &nbsp;Edit Article

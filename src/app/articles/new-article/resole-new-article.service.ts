@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ResoleNewArticleService implements Resolve<any>{
+export class ResoleNewArticleService implements Resolve<any> {
 
   constructor(
     private data: DataService
@@ -15,7 +15,6 @@ export class ResoleNewArticleService implements Resolve<any>{
     route: import('@angular/router').ActivatedRouteSnapshot,
     state: import('@angular/router').RouterStateSnapshot
   ): Observable<any> {
-
     return this.data.getArticle(route.params['slug']);
   }
 }

@@ -32,22 +32,22 @@ export class NewArticleComponent implements OnInit {
               }
 
   ngOnInit() {
+
     this.isSubmitted = false;
-    // this.articleSlug = this.route.snapshot.params['slug'];
-    // this.route.params
-    //   .subscribe(
-    //     (params: Params)
-    //   )
-    // console.log(this.articleSlug);
-    this.route.data.pipe(
-      map(data => {
-        console.log(data);
-        return data.profile.article;
-      })
-    ).subscribe((data: ArticleInfor) => {
+
+    this.route.firstChild.data.pipe(map((val) => {
+      return val.profile.article;
+    }))
+    .subscribe((data: ArticleInfor) => {
       this.articleInfor = data;
-      console.log(data);
+      this.articleForm.patchValue({
+        'title': this.articleInfor.title,
+        'description': this.articleInfor.description,
+        'body': this.articleInfor.body
+      });
+      this.tagList = this.articleInfor.tagList;
     });
+
   }
 
   addTag() {
