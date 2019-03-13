@@ -17,7 +17,8 @@ export class HomeComponent implements OnInit {
   loaded = false;
   optionArr = ["Global Feed", "Your Feed", ""];
   currIndex = 0;
-  p = 1;
+  pagilist = [];
+  currenttag:string
 
   constructor(
     private auth: AuthService,
@@ -39,15 +40,25 @@ export class HomeComponent implements OnInit {
     });
     this.currIndex = 0;
     this.onChange(this.optionArr[0]);
+
     this.tagservice.currentMessage.subscribe(message => {
+      this.currenttag= message
       this.optionArr[2] = message;
       if (this.optionArr[2] !== "") {
         this.currIndex = 2;
       }
       // console.log(this.optionArr);
       this.data.getArticleTag(message).subscribe((param: Article) => {
-        this.articlesList = param;
-        this.p = 1;
+        // console.log(1); // mess = ''
+        // this.articlesList = param;
+        // console.log(param);
+        if (message) {
+          this.articlesList = param;
+          this.pagilist = [];
+          for (var i = 1; i <= param.articlesCount / 10; i++) {
+            this.pagilist.push(i);
+          }
+        }
       });
     });
   }
@@ -59,7 +70,10 @@ export class HomeComponent implements OnInit {
         this.articlesList = list;
         this.loaded = true;
         this.optionArr[2] = "";
-        this.p = 1;
+        this.pagilist = [];
+        for (let i = 1; i <= list.articlesCount / 10; i++) {
+          this.pagilist.push(i);
+        }
       });
     } else if (event === this.optionArr[1]) {
       this.currIndex = 1;
@@ -67,7 +81,10 @@ export class HomeComponent implements OnInit {
         this.articlesList = list;
         this.loaded = true;
         this.optionArr[2] = "";
-        this.p = 1;
+        this.pagilist = [];
+        for (let i = 1; i <= list.articlesCount / 10; i++) {
+          this.pagilist.push(i);
+        }
       });
     }
   }
@@ -81,6 +98,27 @@ export class HomeComponent implements OnInit {
       article.favorited = false;
       article.favoritesCount -= 1;
       this.data.unfavouritePost(article.slug).subscribe();
+    }
+  }
+  getnewpagi(value) {
+    if (this.currIndex == 0) {
+      // console.log("haha")
+      this.data
+        .getPagiHome("", ((value - 1) * 10).toString())
+        .subscribe((list: Article) => {
+          this.articlesList = list;
+        });
+    }
+    if (this.currIndex == 2) {
+    
+        this.data
+          .getPagiHome(this.currenttag, ((value - 1) * 10).toString())
+          .subscribe((list: Article) => {
+            this.articlesList = list;
+          });
+  
+
+      // console.log("hihi")
     }
   }
 }

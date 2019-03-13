@@ -30,6 +30,7 @@ export class ProfileComponent implements OnInit {
   }[];
   condition = false;
   following: boolean;
+  empty: boolean;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -48,7 +49,7 @@ export class ProfileComponent implements OnInit {
       .subscribe(data => {
         this.dataService.getProfile(data.username).subscribe(
           (params: { profile: Profile }) => {
-            this.condition =false
+            this.condition = false
             this.profileInfo = params.profile;
             console.log(this.profileInfo);
             this.p = 1;
@@ -68,6 +69,11 @@ export class ProfileComponent implements OnInit {
         .getAllUserArticle(params.username)
         .subscribe((articleLists: Article) => {
           this.articles = articleLists.articles;
+          if (this.articles.length  !== 0) {
+            this.empty = false;
+          } else {
+            this.empty = true;
+          }
           this.p = 1;
         });
     });
@@ -81,6 +87,11 @@ export class ProfileComponent implements OnInit {
         .subscribe((articleLists: Article) => {
           this.articles = articleLists.articles;
           this.p = 1;
+          if (this.articles.length  !== 0) {
+            this.empty = false;
+          } else {
+            this.empty = true;
+          }
         });
     });
   }

@@ -22,6 +22,18 @@ export class DataService {
   TAGS_URL = "https://conduit.productionready.io/api/tags";
 
   constructor(private http: HttpClient) {}
+  getPagiHome(
+    tag: string,
+    offset: string
+  ): Observable<Object> {
+    return this.http.get(this.ALL_ARTICLES_URL, {
+      params: {
+        tag: tag,
+        limit: "10",
+        offset: offset
+      }
+    });
+  }
 
   getAllArticles(): Observable<Object> {
     return this.http.get(this.ALL_ARTICLES_URL);
@@ -100,7 +112,7 @@ export class DataService {
   getArticle(slug: string) {
     return this.http.get(`${this.ALL_ARTICLES_URL}/${slug}`);
   }
-  getArticleTag(tag:string){
+  getArticleTag(tag: string) {
     return this.http.get(`${this.ALL_ARTICLES_URL}/?tag=${tag}`);
   }
 
@@ -161,5 +173,4 @@ export class DataService {
   exchangeUsename(value) {
     this.currentUser = value;
   }
-
 }

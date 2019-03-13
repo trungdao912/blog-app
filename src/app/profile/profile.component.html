@@ -64,7 +64,7 @@
             </li>
           </ul>
         </div>
-        <p id="notis" *ngIf="!articles">No articles to display...</p>
+        <p id="notis" *ngIf="empty">No articles to display...</p>
         <div
           *ngFor="
             let article of (articles
