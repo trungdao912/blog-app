@@ -13,7 +13,7 @@ import { Profile } from 'selenium-webdriver/firefox';
   styleUrls: ["./article-infomation.component.css"]
 })
 export class ArticleInfomationComponent implements OnInit {
-  articleInfor:ArticleInfor
+  articleInfor: ArticleInfor;
   constructor(
     private activatedRoute: ActivatedRoute,
     private dataService: DataService,
@@ -21,9 +21,10 @@ export class ArticleInfomationComponent implements OnInit {
   ) {
     this.activatedRoute.data.pipe(
       map(data => {
-       return data.profile.article
+        console.log(data);
+       return data.profile.article;
       })
-    ).subscribe((data: ArticleInfor) =>{
+    ).subscribe((data: ArticleInfor) => {
 
       this.articleInfor = data;
     });

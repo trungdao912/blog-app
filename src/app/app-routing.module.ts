@@ -11,13 +11,19 @@ import { ArticleInfomationComponent } from './articles/article-infomation/articl
 import { NewArticleComponent } from './articles/new-article/new-article.component';
 import { SettingComponent } from './setting/setting.component';
 import { ResolveArticleIdService } from './articles/resolve-article-id.service';
+import { ResoleNewArticleService } from './articles/new-article/resole-new-article.service';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'signin', component: SigninComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'settings', component: SettingComponent, canActivate: [AuthGuard] },
-  {path: 'editor', component: NewArticleComponent, canActivate: [AuthGuard]},
+  {path: 'editor', component: NewArticleComponent, canActivate: [AuthGuard], children: [
+    {path: ':slug', component: NewArticleComponent ,
+      resolve: {
+        profile: ResoleNewArticleService
+      }}
+  ]},
   {
     path: ':username',
     component: ProfileComponent,
