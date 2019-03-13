@@ -39,19 +39,28 @@
           </ul>
         </div>
 
-        <div
-          *ngFor="
-            let article of (articlesList?.articles
-              | paginate: { itemsPerPage: 10, currentPage: p })
-          "
-        >
+        <div *ngFor="let article of articlesList?.articles">
           <app-articles [article]="article"></app-articles>
         </div>
-        <pagination-controls (pageChange)="p = $event"></pagination-controls>
       </div>
+      
+      
+
+
+
+
       <div class="col-md-3">
         <div class="sidebar">
           <app-tag></app-tag>
+        </div>
+      </div>
+      <div class="sidebar">
+        <div
+          class="tag-list"
+          *ngFor="let p of pagilist"
+         
+        >
+          <a (click)="getnewpagi(p)" class="tag-pill tag-default">{{ p }}</a>
         </div>
       </div>
     </div>
