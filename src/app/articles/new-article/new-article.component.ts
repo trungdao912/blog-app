@@ -1,15 +1,18 @@
+import { CanComponentDeactivate } from './../../auth/can-deactivate-guard.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { DataService } from 'src/app/data.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-new-article',
   templateUrl: './new-article.component.html',
   styleUrls: ['./new-article.component.css']
 })
-export class NewArticleComponent implements OnInit {
+export class NewArticleComponent implements OnInit, CanComponentDeactivate {
 
+  submit = false;
   articleForm: FormGroup;
   // tagField = new FormControl('');
   tagList = [];
@@ -45,9 +48,17 @@ export class NewArticleComponent implements OnInit {
     // console.log('NewForm');
     // console.log(this.articleForm.value);
     // tslint:disable-next-line:max-line-length
+    this.submit = true;
     this.data.createArticles(this.articleForm.value.title, this.articleForm.value.description, this.articleForm.value.body, this.tagList).subscribe(data => {
       this.router.navigateByUrl('/');
       return;
     });
+   }
+
+   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+    if (this.submit) {
+      return true;
+    }
+    return confirm('Do you want to discard the changes');
    }
 }
