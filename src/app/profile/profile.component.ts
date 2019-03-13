@@ -13,7 +13,6 @@ import { Author } from "../models/author.model";
   styleUrls: ["./profile.component.css"]
 })
 export class ProfileComponent implements OnInit {
-  p: number;
   username: string;
   profileInfo: Profile;
   articles: {
@@ -31,6 +30,7 @@ export class ProfileComponent implements OnInit {
   condition = false;
   following: boolean;
   empty: boolean;
+  pagiList = [];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -49,10 +49,9 @@ export class ProfileComponent implements OnInit {
       .subscribe(data => {
         this.dataService.getProfile(data.username).subscribe(
           (params: { profile: Profile }) => {
-            this.condition = false
+            this.username = data.username;
+            this.condition = false;
             this.profileInfo = params.profile;
-            console.log(this.profileInfo);
-            this.p = 1;
           },
           err => {
             this.route.navigateByUrl("/");
@@ -68,13 +67,23 @@ export class ProfileComponent implements OnInit {
       this.dataService
         .getAllUserArticle(params.username)
         .subscribe((articleLists: Article) => {
+          this.pagiList = [];
+          if (articleLists.articlesCount % 10 == 0) {
+            for (let i = 1; i <= articleLists.articlesCount / 10; i++) {
+              this.pagiList.push(i);
+            }
+          } else {
+            for (let i = 1; i <= articleLists.articlesCount / 10 + 1; i++) {
+              this.pagiList.push(i);
+            }
+          }
+          // console.log(this.pagiList)
           this.articles = articleLists.articles;
-          if (this.articles.length  !== 0) {
+          if (this.articles.length !== 0) {
             this.empty = false;
           } else {
             this.empty = true;
           }
-          this.p = 1;
         });
     });
   }
@@ -85,9 +94,20 @@ export class ProfileComponent implements OnInit {
       this.dataService
         .getFavouriteArticle(params.username)
         .subscribe((articleLists: Article) => {
+          this.pagiList = [];
+          if (articleLists.articlesCount % 10 == 0) {
+            for (let i = 1; i <= articleLists.articlesCount / 10; i++) {
+              this.pagiList.push(i);
+            }
+          } else {
+            for (let i = 1; i <= articleLists.articlesCount / 10 + 1; i++) {
+              this.pagiList.push(i);
+            }
+          }
+          // console.log(this.pagiList)
           this.articles = articleLists.articles;
-          this.p = 1;
-          if (this.articles.length  !== 0) {
+
+          if (this.articles.length !== 0) {
             this.empty = false;
           } else {
             this.empty = true;
@@ -124,5 +144,27 @@ export class ProfileComponent implements OnInit {
           // this.following = val.profile.following;
         });
     });
+  }
+  getnewpagi(value) {
+    if (this.condition == false) {
+      this.dataService
+        .getAllUserArticleWithOffset(
+          this.username,
+          ((value - 1) * 10).toString()
+        )
+        .subscribe((param: Article) => {
+          this.articles = param.articles;
+        });
+    }
+    if (this.condition == true) {
+      this.dataService
+        .getFavouriteArticleWithOffSet(
+          this.username,
+          ((value - 1) * 10).toString()
+        )
+        .subscribe((param: Article) => {
+          this.articles = param.articles;
+        });
+    }
   }
 }

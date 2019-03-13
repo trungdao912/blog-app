@@ -3,3 +3,12 @@
     text-align:center;
     color:  red
 }
+.sidebar {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0px;
+    
+  }
+  a{
+    display: inline-block
+  }

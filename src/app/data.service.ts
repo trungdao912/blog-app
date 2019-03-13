@@ -22,10 +22,7 @@ export class DataService {
   TAGS_URL = "https://conduit.productionready.io/api/tags";
 
   constructor(private http: HttpClient) {}
-  getPagiHome(
-    tag: string,
-    offset: string
-  ): Observable<Object> {
+  getPagiHome(tag: string, offset: string): Observable<Object> {
     return this.http.get(this.ALL_ARTICLES_URL, {
       params: {
         tag: tag,
@@ -120,8 +117,17 @@ export class DataService {
     return this.http.get(this.ALL_ARTICLES_URL, {
       params: {
         author: `${username}`,
-        limit: "20",
+        limit: "10",
         offset: "0"
+      }
+    });
+  }
+  getAllUserArticleWithOffset(username: string, offset: string) {
+    return this.http.get(this.ALL_ARTICLES_URL, {
+      params: {
+        author: `${username}`,
+        limit: "10",
+        offset: offset
       }
     });
   }
@@ -130,8 +136,17 @@ export class DataService {
     return this.http.get(this.ALL_ARTICLES_URL, {
       params: {
         favorited: `${username}`,
-        limit: "20",
+        limit: "10",
         offset: "0"
+      }
+    });
+  }
+  getFavouriteArticleWithOffSet(username: string, offset :string) {
+    return this.http.get(this.ALL_ARTICLES_URL, {
+      params: {
+        favorited: `${username}`,
+        limit: "10",
+        offset: offset
       }
     });
   }

@@ -65,15 +65,14 @@
           </ul>
         </div>
         <p id="notis" *ngIf="empty">No articles to display...</p>
-        <div
-          *ngFor="
-            let article of (articles
-              | paginate: { itemsPerPage: 3, currentPage: p })
-          "
-        >
+        <div *ngFor="let article of articles">
           <app-articles [article]="article"></app-articles>
         </div>
-        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        <div class="sidebar">
+          <div class="tag-list" *ngFor="let p of pagiList">
+            <a (click)="getnewpagi(p)" class="tag-pill tag-default">{{ p }}</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
