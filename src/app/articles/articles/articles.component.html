@@ -1,7 +1,7 @@
 <div class="article-preview">
   <div class="article-meta" routerLink="/{{ article?.author.username }}">
 
-    <a><img src="{{ article?.author.image }}" alt="page.png"></a>
+    <a><img #image [src]="article?.author.image" alt="page.png"></a>
     <div class="info">
       <a class="author">{{ article?.author.username }}</a>
       <span class="date">{{ article?.createdAt | date :'MMM d, y, h:mm:ss a' }}</span>
