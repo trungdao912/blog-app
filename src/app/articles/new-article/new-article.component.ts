@@ -13,8 +13,6 @@ import { DataService } from "src/app/data.service";
   styleUrls: ["./new-article.component.css"]
 })
 export class NewArticleComponent implements OnInit, CanComponentDeactivate {
-  @HostListener("window:beforeunload", ["$event"])
-
   submit = false;
   articleForm: FormGroup;
   // tagField = new FormControl('');
@@ -122,6 +120,7 @@ export class NewArticleComponent implements OnInit, CanComponentDeactivate {
     }
   }
 
+  @HostListener("window:beforeunload", ["$event"])
   unloadNotification($event: any) {
     if (!this.canDeactivate()) {
       $event.returnValue = true;
