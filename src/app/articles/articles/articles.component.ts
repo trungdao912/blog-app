@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class ArticlesComponent implements OnInit {
   condition: boolean;
   data = true;
+  hidden = false;
   @Input() article: {
     title: string;
     slug: string;

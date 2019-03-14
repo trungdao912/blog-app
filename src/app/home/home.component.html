@@ -38,7 +38,7 @@
             </li>
           </ul>
         </div>
-
+        <div [hidden]="loaded">Loading articles ...</div>
         <div *ngFor="let article of articlesList?.articles">
           <app-articles [article]="article"></app-articles>
         </div>
@@ -50,7 +50,7 @@
         </div>
       </div>
       <div class="sidebar">
-        <div class="tag-list" *ngFor="let p of pagilist">
+        <div class="tag-list" *ngFor="let p of pagilist" [hidden]="!loaded">
           <a (click)="getnewpagi(p)" class="tag-pill tag-default">{{ p }}</a>
         </div>
       </div>

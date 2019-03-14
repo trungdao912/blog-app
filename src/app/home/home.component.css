@@ -11,3 +11,7 @@
 a{
   display: inline-block
 }
+
+li {
+  cursor: pointer;
+}

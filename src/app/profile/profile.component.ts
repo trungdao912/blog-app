@@ -31,6 +31,7 @@ export class ProfileComponent implements OnInit {
   following: boolean;
   empty: boolean;
   pagiList = [];
+  loaded = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -63,10 +64,13 @@ export class ProfileComponent implements OnInit {
 
   myArticleLoad() {
     this.condition = false;
+    this.loaded = false;
+    this.articles = null;
     this.activatedRoute.params.subscribe(params => {
       this.dataService
         .getAllUserArticle(params.username)
         .subscribe((articleLists: Article) => {
+          this.loaded = true;
           this.pagiList = [];
           if (articleLists.articlesCount % 10 == 0) {
             for (let i = 1; i <= articleLists.articlesCount / 10; i++) {
@@ -90,10 +94,13 @@ export class ProfileComponent implements OnInit {
 
   myFavouriteLoad() {
     this.condition = true;
+    this.loaded = false;
+    this.articles = null;
     this.activatedRoute.params.subscribe(params => {
       this.dataService
         .getFavouriteArticle(params.username)
         .subscribe((articleLists: Article) => {
+          this.loaded = true;
           this.pagiList = [];
           if (articleLists.articlesCount % 10 == 0) {
             for (let i = 1; i <= articleLists.articlesCount / 10; i++) {

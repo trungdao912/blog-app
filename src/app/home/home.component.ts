@@ -64,6 +64,8 @@ export class HomeComponent implements OnInit {
   }
 
   onChange(event) {
+    this.loaded = false;
+    this.articlesList = null;
     if (event === this.optionArr[0]) {
       this.currIndex = 0;
       this.data.getAllArticles().subscribe((list: Article) => {
@@ -76,6 +78,8 @@ export class HomeComponent implements OnInit {
         }
       });
     } else if (event === this.optionArr[1]) {
+      this.articlesList = null;
+      this.loaded = false;
       this.currIndex = 1;
       this.data.getUserArticles().subscribe((list: Article) => {
         this.articlesList = list;
