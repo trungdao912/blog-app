@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth/auth.service';
+import { UserIdleService } from 'angular-user-idle';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +10,12 @@ import { AuthService } from './auth/auth.service';
 export class AppComponent implements OnInit {
   title = 'blog-app';
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, private userIdle: UserIdleService) {}
 
   ngOnInit() {
     this.auth.isAuthentiCated();
+    this.userIdle.startWatching();
+    this.userIdle.onTimerStart().subscribe(() => {});
+    this.userIdle.onTimeout().subscribe(() => this.auth.logout());
   }
 }

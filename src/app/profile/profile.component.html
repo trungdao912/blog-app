@@ -65,6 +65,7 @@
           </ul>
         </div>
         <p id="notis" *ngIf="empty">No articles to display...</p>
+        <div [hidden]="loaded">Loading articles ...</div>
         <div *ngFor="let article of articles">
           <app-articles [article]="article"></app-articles>
         </div>

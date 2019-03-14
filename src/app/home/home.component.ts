@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   condition: boolean;
   loggedIn: boolean;
   loaded = false;
+  tagLoaded = true;
   optionArr = ["Global Feed", "Your Feed", ""];
   currIndex = 0;
   pagilist = [];
@@ -47,11 +48,15 @@ export class HomeComponent implements OnInit {
       if (this.optionArr[2] !== "") {
         this.currIndex = 2;
       }
+      this.tagLoaded = false;
+      this.articlesList = null;
+
       // console.log(this.optionArr);
       this.data.getArticleTag(message).subscribe((param: Article) => {
         // console.log(1); // mess = ''
         // this.articlesList = param;
         // console.log(param);
+        this.tagLoaded = true;
         if (message) {
           this.articlesList = param;
           this.pagilist = [];
@@ -64,6 +69,8 @@ export class HomeComponent implements OnInit {
   }
 
   onChange(event) {
+    this.loaded = false;
+    this.articlesList = null;
     if (event === this.optionArr[0]) {
       this.currIndex = 0;
       this.data.getAllArticles().subscribe((list: Article) => {
@@ -76,6 +83,8 @@ export class HomeComponent implements OnInit {
         }
       });
     } else if (event === this.optionArr[1]) {
+      this.articlesList = null;
+      this.loaded = false;
       this.currIndex = 1;
       this.data.getUserArticles().subscribe((list: Article) => {
         this.articlesList = list;
