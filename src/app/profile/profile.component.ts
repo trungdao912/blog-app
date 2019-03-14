@@ -68,13 +68,16 @@ export class ProfileComponent implements OnInit {
         .getAllUserArticle(params.username)
         .subscribe((articleLists: Article) => {
           this.pagiList = [];
-          if (articleLists.articlesCount % 10 == 0) {
-            for (let i = 1; i <= articleLists.articlesCount / 10; i++) {
-              this.pagiList.push(i);
-            }
+          if (articleLists.articlesCount <= 10) {
           } else {
-            for (let i = 1; i <= articleLists.articlesCount / 10 + 1; i++) {
-              this.pagiList.push(i);
+            if (articleLists.articlesCount % 10 == 0) {
+              for (let i = 1; i <= articleLists.articlesCount / 10; i++) {
+                this.pagiList.push(i);
+              }
+            } else {
+              for (let i = 1; i <= articleLists.articlesCount / 10 + 1; i++) {
+                this.pagiList.push(i);
+              }
             }
           }
           // console.log(this.pagiList)
@@ -95,15 +98,19 @@ export class ProfileComponent implements OnInit {
         .getFavouriteArticle(params.username)
         .subscribe((articleLists: Article) => {
           this.pagiList = [];
-          if (articleLists.articlesCount % 10 == 0) {
-            for (let i = 1; i <= articleLists.articlesCount / 10; i++) {
-              this.pagiList.push(i);
-            }
+          if (articleLists.articlesCount <= 10) {
           } else {
-            for (let i = 1; i <= articleLists.articlesCount / 10 + 1; i++) {
-              this.pagiList.push(i);
+            if (articleLists.articlesCount % 10 == 0) {
+              for (let i = 1; i <= articleLists.articlesCount / 10; i++) {
+                this.pagiList.push(i);
+              }
+            } else {
+              for (let i = 1; i <= articleLists.articlesCount / 10 + 1; i++) {
+                this.pagiList.push(i);
+              }
             }
           }
+
           // console.log(this.pagiList)
           this.articles = articleLists.articles;
 
