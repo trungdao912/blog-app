@@ -1,14 +1,14 @@
-import { AuthService } from "./../auth/auth.service";
-import { Article } from "./../models/article.model";
-import { Author } from "./../models/author.model";
-import { DataService } from "./../data.service";
-import { Component, OnInit } from "@angular/core";
-import { TagService } from "./tag.service";
+import { AuthService } from './../auth/auth.service';
+import { Article } from './../models/article.model';
+import { Author } from './../models/author.model';
+import { DataService } from './../data.service';
+import { Component, OnInit } from '@angular/core';
+import { TagService } from './tag.service';
 
 @Component({
-  selector: "app-home",
-  templateUrl: "./home.component.html",
-  styleUrls: ["./home.component.css"]
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
   articlesList: Article;
@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   loggedIn: boolean;
   loaded = false;
   tagLoaded = true;
-  optionArr = ["Global Feed", "Your Feed", ""];
+  optionArr = ['Global Feed', 'Your Feed', ''];
   currIndex = 0;
   pagilist = [];
   currenttag:string
@@ -43,24 +43,24 @@ export class HomeComponent implements OnInit {
     this.onChange(this.optionArr[0]);
 
     this.tagservice.currentMessage.subscribe(message => {
-      this.currenttag= message
+      this.currenttag = message;
       this.optionArr[2] = message;
-      if (this.optionArr[2] !== "") {
+      if (this.optionArr[2] !== '') {
         this.currIndex = 2;
+      }
+      else {
+        this.currIndex = 0;
       }
       this.tagLoaded = false;
       this.articlesList = null;
 
       // console.log(this.optionArr);
       this.data.getArticleTag(message).subscribe((param: Article) => {
-        // console.log(1); // mess = ''
-        // this.articlesList = param;
-        // console.log(param);
         this.tagLoaded = true;
         if (message) {
           this.articlesList = param;
           this.pagilist = [];
-          for (var i = 1; i <= param.articlesCount / 10; i++) {
+          for (let i = 1; i <= param.articlesCount / 10; i++) {
             this.pagilist.push(i);
           }
         }
@@ -76,7 +76,7 @@ export class HomeComponent implements OnInit {
       this.data.getAllArticles().subscribe((list: Article) => {
         this.articlesList = list;
         this.loaded = true;
-        this.optionArr[2] = "";
+        this.optionArr[2] = '';
         this.pagilist = [];
         for (let i = 1; i <= list.articlesCount / 10; i++) {
           this.pagilist.push(i);
@@ -89,7 +89,7 @@ export class HomeComponent implements OnInit {
       this.data.getUserArticles().subscribe((list: Article) => {
         this.articlesList = list;
         this.loaded = true;
-        this.optionArr[2] = "";
+        this.optionArr[2] = '';
         this.pagilist = [];
         for (let i = 1; i <= list.articlesCount / 10; i++) {
           this.pagilist.push(i);
@@ -99,7 +99,7 @@ export class HomeComponent implements OnInit {
   }
 
   onToggleFavorite(article) {
-    if (article.favorited == false) {
+    if (article.favorited === false) {
       article.favorited = true;
       article.favoritesCount += 1;
       this.data.favouritePost(article.slug).subscribe();
@@ -110,22 +110,22 @@ export class HomeComponent implements OnInit {
     }
   }
   getnewpagi(value) {
-    if (this.currIndex == 0) {
+    if (this.currIndex === 0) {
       // console.log("haha")
       this.data
-        .getPagiHome("", ((value - 1) * 10).toString())
+        .getPagiHome('', ((value - 1) * 10).toString())
         .subscribe((list: Article) => {
           this.articlesList = list;
         });
     }
     if (this.currIndex == 2) {
-    
+
         this.data
           .getPagiHome(this.currenttag, ((value - 1) * 10).toString())
           .subscribe((list: Article) => {
             this.articlesList = list;
           });
-  
+
 
       // console.log("hihi")
     }

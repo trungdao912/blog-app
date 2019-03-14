@@ -4,6 +4,7 @@ import { User } from '../models/user.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DataService } from '../data.service';
 import { Router } from '@angular/router';
+import { TagService } from '../home/tag.service';
 
 @Component({
   selector: 'app-setting',
@@ -15,7 +16,8 @@ export class SettingComponent implements OnInit {
   settingForm: FormGroup;
   errors;
 
-  constructor(private auth: AuthService, private data: DataService, private router: Router) { }
+  constructor(private auth: AuthService, private data: DataService, private router: Router,
+              private tagService: TagService) { }
 
   ngOnInit() {
     this.currentUser = this.auth.checkUser();
@@ -45,6 +47,7 @@ export class SettingComponent implements OnInit {
 
   onLogout() {
     this.auth.logout();
+    this.tagService.changeMessage('');
     this.router.navigateByUrl('/');
   }
 
