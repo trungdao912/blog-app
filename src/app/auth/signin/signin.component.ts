@@ -11,7 +11,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class SigninComponent implements OnInit {
   myForm: FormGroup;
   errors;
-  loading = false;
 
   constructor(private form: FormBuilder, private auth: AuthService, private route: ActivatedRoute, private router: Router) { }
 
@@ -26,7 +25,6 @@ export class SigninComponent implements OnInit {
   }
 
   onSubmit() {
-    this.loading = true;
     this.auth.login(this.myForm.get('email').value, this.myForm.get('password').value);
   }
 }

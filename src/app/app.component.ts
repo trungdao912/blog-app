@@ -16,6 +16,10 @@ export class AppComponent implements OnInit {
     this.auth.isAuthentiCated();
     this.userIdle.startWatching();
     this.userIdle.onTimerStart().subscribe(() => {});
-    this.userIdle.onTimeout().subscribe(() => this.auth.logout());
+    this.userIdle.onTimeout().subscribe(() => {
+      alert('You have been idle for too long! Please Log In');
+      this.auth.logout();
+      location.reload();
+    });
   }
 }

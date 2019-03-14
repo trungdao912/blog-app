@@ -122,8 +122,6 @@ export class NewArticleComponent implements OnInit, CanComponentDeactivate {
 
   @HostListener("window:beforeunload", ["$event"])
   unloadNotification($event: any) {
-    if (!this.canDeactivate()) {
-      $event.returnValue = true;
-    }
+    return false;
   }
 }

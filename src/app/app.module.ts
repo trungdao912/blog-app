@@ -48,13 +48,7 @@ import { UserIdleModule } from 'angular-user-idle';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    UserIdleModule.forRoot({idle: 1000, timeout: 10000, ping: 1}),
-    NgxLoadingModule.forRoot({animationType: ngxLoadingAnimationTypes.wanderingCubes,
-      backdropBackgroundColour: 'rgba(0,0,0,0.1)', 
-      backdropBorderRadius: '4px',
-      primaryColour: '#ffffff', 
-      secondaryColour: '#ffffff', 
-      tertiaryColour: '#ffffff'})
+    UserIdleModule.forRoot({idle: 1000, timeout: 6000, ping: 1})
   ],
   providers: [
     {

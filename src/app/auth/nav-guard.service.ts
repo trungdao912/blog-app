@@ -14,7 +14,6 @@ export class NavGuardService implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
         return this.auth.isAuthenticate.pipe(map((authenticated) => {
-            console.log(authenticated)
             if (!authenticated) {
                 return true;
             } else {
