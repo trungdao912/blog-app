@@ -11,7 +11,6 @@ import { getToken } from '@angular/router/src/utils/preactivation';
 export class AuthService {
   // public currentUserInfo = new BehaviorSubject<Object>({});
   // public currentUser = this.currentUserInfo.asObservable();
-
   public user: BehaviorSubject<User>;
   public userEmit: Observable<User>;
 
@@ -48,6 +47,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('currentUser');
+    this.router.navigateByUrl('/');
   }
 
   getToken(): string {

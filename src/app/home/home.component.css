@@ -15,3 +15,7 @@ a{
 li {
   cursor: pointer;
 }
+
+.white {
+  color: white;
+}

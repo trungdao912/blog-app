@@ -1,6 +1,6 @@
+import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SigninComponent } from './auth/signin/signin.component';
@@ -10,8 +10,6 @@ import { TokenInterceptorService } from './TokenInterceptorService';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
-import { GlobalFeedComponent } from './home/global-feed/global-feed.component';
-import { YourFeedComponent } from './home/your-feed/your-feed.component';
 import { HomeComponent } from './home/home.component';
 import { TagComponent } from './home/tag/tag.component';
 import { DebounceClickDirective } from './debounce-click.directive';
@@ -22,9 +20,8 @@ import { SettingComponent } from './setting/setting.component';
 import { CommentComponent } from './articles/comment/comment.component';
 import { NewArticleComponent } from './articles/new-article/new-article.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
-import {NgxPaginationModule} from 'ngx-pagination'; 
-import { NgxLoadingModule } from 'ngx-loading';
 import { MarkdownPipe } from './articles/markdown.pipe';
+import { UserIdleModule } from 'angular-user-idle';
 
 @NgModule({
   declarations: [
@@ -33,8 +30,6 @@ import { MarkdownPipe } from './articles/markdown.pipe';
     SignupComponent,
     HeaderComponent,
     FooterComponent,
-    GlobalFeedComponent,
-    YourFeedComponent,
     HomeComponent,
     TagComponent,
     DebounceClickDirective,
@@ -53,8 +48,13 @@ import { MarkdownPipe } from './articles/markdown.pipe';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    NgxPaginationModule,
-    NgxLoadingModule.forRoot({})
+    UserIdleModule.forRoot({idle: 1000, timeout: 10000, ping: 1}),
+    NgxLoadingModule.forRoot({animationType: ngxLoadingAnimationTypes.wanderingCubes,
+      backdropBackgroundColour: 'rgba(0,0,0,0.1)', 
+      backdropBorderRadius: '4px',
+      primaryColour: '#ffffff', 
+      secondaryColour: '#ffffff', 
+      tertiaryColour: '#ffffff'})
   ],
   providers: [
     {

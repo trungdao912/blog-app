@@ -9,6 +9,7 @@ import { Article } from "./models/article.model";
 })
 export class DataService {
   currentUser: string;
+
   getUser() {
     return this.http.get(this.USER_URL);
   }

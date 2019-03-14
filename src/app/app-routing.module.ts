@@ -13,11 +13,12 @@ import { SettingComponent } from './setting/setting.component';
 import { ResolveArticleIdService } from './articles/resolve-article-id.service';
 import { ResoleNewArticleService } from './articles/new-article/resole-new-article.service';
 import { CanDeactivateGuardService } from './auth/can-deactivate-guard.service';
+import { NavGuardService } from './auth/nav-guard.service';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
-  { path: 'signin', component: SigninComponent },
-  { path: 'signup', component: SignupComponent },
+  { path: 'signin', component: SigninComponent, canActivate: [NavGuardService] },
+  { path: 'signup', component: SignupComponent, canActivate: [NavGuardService] },
   { path: 'settings', component: SettingComponent, canActivate: [AuthGuard] },
   {path: 'editor', component: NewArticleComponent, canActivate: [AuthGuard], canDeactivate: [CanDeactivateGuardService], children: [
     {path: ':slug', component: NewArticleComponent ,
