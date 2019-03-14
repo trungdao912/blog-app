@@ -76,6 +76,245 @@ ng new blog-app
  - Chặn người dùng chưa đăng nhập không cho vào các routes như setting, editor - TrungDD10
  - Sau khi người dùng không thao tác sau một khoảng thời gian, thì người dùng sẽ bị logout - TrungDD10
  - Kiểm tra xe người dùng có chắc chắn muốn chuyển route sau khi edit hay không - TrungDD10
+ 
+ ## API sử dụng
+ 
+ ### Kiểm tra đăng nhập
+
+`POST /api/users/login`
+
+Ví dụ: 
+```JSON
+{
+  "user":{
+    "email": "jake@jake.jake",
+    "password": "jakejake"
+  }
+}
+```
+
+Trường yêu cầu: `email`, `password`
+
+
+### Đăng kí tài khoản mới:
+
+`POST /api/users`
+
+Ví dụ
+```JSON
+{
+  "user":{
+    "username": "Jacob",
+    "email": "jake@jake.jake",
+    "password": "jakejake"
+  }
+}
+```
+
+Không yêu cầu đăng nhập
+Trường yêu cầu: `email`, `username`, `password`
+
+
+
+### Lấy thông tin người dùng hiện tại
+
+`GET /api/user`
+ 
+ Yêu cầu đăng nhập
+
+### Update thông tin người dùng
+
+`PUT /api/user`
+
+Ví dụ
+```JSON
+{
+  "user":{
+    "email": "jake@jake.jake",
+    "bio": "I like to skateboard",
+    "image": "https://i.stack.imgur.com/xHWG8.jpg"
+  }
+}
+```
+
+Yêu cầu dăng nhập
+
+
+Chấp nhận các trường sau: `email`, `username`, `password`, `image`, `bio`
+
+
+
+### Lấy thông tin profile
+
+`GET /api/profiles/:username`
+
+Yêu cầu đăng nhập
+
+
+
+### Follow user
+
+`POST /api/profiles/:username/follow`
+
+Yêu cầu đăng nhập
+Không yêu cầu params
+
+
+### Unfollow user
+
+`DELETE /api/profiles/:username/follow`
+
+Yêu cầu đăng nhập
+Không yêu cầu params
+
+
+
+### Gọi ra list các articles
+`GET /api/articles`
+
+Trả về tất cả các articles được post bởi người dùng, cung cấp các params sau: tag, author và favorited để lọc kết quả
+Query Parameters:
+
+Filter by tag:
+
+`?tag=AngularJS`
+
+Filter by author:
+
+`?author=jake`
+
+Favorited by user:
+
+`?favorited=jake`
+
+Limit number of articles (default is 20):
+
+`?limit=20`
+
+Offset/skip number of articles (default is 0):
+
+`?offset=0`
+
+Yêu cầu đăng nhập
+
+
+
+### Trả về các articles mà người dùng follow
+
+`GET /api/articles/feed`
+Có thể sử dụng `limit` và `offset`
+Yêu cầu đăng nhập
+
+
+### Lấy một article cụ thể
+
+`GET /api/articles/:slug`
+
+Không yêu cầu đăng nhập
+
+### Tạo Article mới
+
+`POST /api/articles`
+
+Ví dụ
+
+```JSON
+{
+  "article": {
+    "title": "How to train your dragon",
+    "description": "Ever wonder how?",
+    "body": "You have to believe",
+    "tagList": ["reactjs", "angularjs", "dragons"]
+  }
+}
+```
+
+Yêu cầu đăng nhập
+
+Trường bắt buộc: `title`, `description`, `body`
+
+Trường không bắt buộc: `tagList` và một mảng gồm các chuỗi
+
+
+
+### Update Article
+
+`PUT /api/articles/:slug`
+
+Ví dụ
+
+```JSON
+{
+  "article": {
+    "title": "Did you train your dragon?"
+  }
+}
+```
+
+Không yêu cầu đăng nhập
+
+Trường không bắt buộc: `title`, `description`, `body`
+
+### Delete Article
+
+`DELETE /api/articles/:slug`
+
+Yêu cầu đăng nhập
+
+### Add Comments to an Article
+
+`POST /api/articles/:slug/comments`
+
+Ví dụ
+
+```JSON
+{
+  "comment": {
+    "body": "His name was my name too."
+  }
+}
+```
+
+Yêu cầu đăng nhập
+
+Trường bắt buộc: `body`
+
+
+
+### Lấy tất cả comments từ Article
+
+`GET /api/articles/:slug/comments`
+
+Yêu cầu đăng nhập
+
+
+
+### Delete Comment
+
+`DELETE /api/articles/:slug/comments/:id`
+
+Yêu cầu đăng nhập
+
+
+
+### Favorite Article
+
+`POST /api/articles/:slug/favorite`
+
+Yêu cầu đăng nhập
+
+
+### Unfavorite Article
+
+`DELETE /api/articles/:slug/favorite`
+
+Yêu cầu đăng nhập
+
+### Get Tags
+
+`GET /api/tags`
+
+Yêu cầu đăng nhập
     
 ## Built With
 
